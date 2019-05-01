@@ -2,11 +2,13 @@
  *  Application: IvyGames_SoftwareProduct
  *  Description: Take user through a 'choose your own adventure' style story.  
  *  Title:       SoftwareProduct
- *  Authors:       Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
+ *  Authors:     Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
  *  Date:        4/5/2019
- *  Description: 
+ *  Description: This class creates the user interface for the program. It contains 
+ 		 methods that assign the player a race based on input, set the 
+		 movement functions, and calls for the game to start.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
