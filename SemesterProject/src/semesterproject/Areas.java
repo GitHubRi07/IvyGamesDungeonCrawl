@@ -7,7 +7,7 @@
  *  Version:     1.0
  *  Date:        4/5/2019
  *  Description: This class contains methods that creates each room as an object, 
- 		 sets its enemies, items, picture, and prints it's description.
+ *		 sets its enemies, items, picture, and prints it's description.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
