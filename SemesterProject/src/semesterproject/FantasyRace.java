@@ -1,7 +1,15 @@
-// IvyTech Dungeon Game
-// Riley Tucker, Aiden Hutton
-// Karen Stackhouse, Christopher Fields
-// Created On 4/18/2019
+/**
+ *  Application: IvyGames_SoftwareProduct
+ *  Description: Take user through a 'choose your own adventure' style story.  
+ *  Title:       SoftwareProduct
+ *  Authors:       Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
+
+ *  Version:     1.0
+ *  Date:        4/5/2019
+ *  Description: 
+ *  Assignment:  SDEV265  System - Software Analysis and Projects
+ * 
+ */
 package semesterproject;
 
 
@@ -18,6 +26,7 @@ public abstract class FantasyRace {
     
     
     // getters
+    // character stats
     public static int getCharacterHealth() {
         return characterHealth;
     }
@@ -27,7 +36,7 @@ public abstract class FantasyRace {
     public static int getCharacterSpeed() {
         return characterSpeed;
     }
-    
+    // enemy stats    
     public static int getEnemyHealth() {
         return enemyHealth;
     }
@@ -40,23 +49,24 @@ public abstract class FantasyRace {
     
     
     // setters
+    // character stats
     public static void setCharacterHealth(int newCharacterHealth) {
         characterHealth = newCharacterHealth;
     }
-    public void setCharacterAttackPower(int newCharacterAttackPower) {
+    public static void setCharacterAttackPower(int newCharacterAttackPower) {
         characterAttackPower = newCharacterAttackPower;
     }
-    public void setCharacterSpeed(int newCharacterSpeed) {
+    public static void setCharacterSpeed(int newCharacterSpeed) {
         characterSpeed = newCharacterSpeed;
     }
-    
+    // enemy stats
     public static void setEnemyHealth(int newEnemyHealth) {
         enemyHealth = newEnemyHealth;
     }
-    public void setEnemyAttackPower(int newEnemyAttackPower) {
+    public static void setEnemyAttackPower(int newEnemyAttackPower) {
         enemyAttackPower = newEnemyAttackPower;
     }
-    public void setEnemySpeed(int newEnemySpeed) {
+    public static void setEnemySpeed(int newEnemySpeed) {
         enemySpeed = newEnemySpeed;
     }
     
@@ -66,5 +76,8 @@ public abstract class FantasyRace {
         characterHealth = getCharacterHealth() ;
         characterAttackPower = getCharacterAttackPower();
         characterSpeed = getCharacterSpeed();
+        enemyHealth = getEnemyHealth();
+        enemyAttackPower = getEnemyAttackPower();
+        enemySpeed = getEnemySpeed();
     }
 }
