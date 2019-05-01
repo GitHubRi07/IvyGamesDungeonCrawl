@@ -7,7 +7,7 @@
  *  Version:     1.0
  *  Date:        4/5/2019
  *  Description: This class contains the methods for getting and setting the stats
-                 for players and enemies.
+ *               for players and enemies.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
