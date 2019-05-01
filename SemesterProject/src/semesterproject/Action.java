@@ -59,7 +59,7 @@ public class Action extends FantasyRace {
     public static void goWest() {
     	System.out.println("goWest() -- Pressed button to go West");
     	if (!Action.getPlayerDead()) {
-    		if (Areas.getEnemyDead(Areas.getArea())) {
+    		if (!Areas.getEnemyDead(Areas.getArea())) {
                 switch (Areas.getArea()) {
 	                case 2:
 	                	pickUpItem(Areas.getArea());
@@ -163,7 +163,7 @@ public class Action extends FantasyRace {
     public static void goEast() {
     	System.out.println("goEast() -- Pressed button to go East");
     	if (!Action.getPlayerDead()) {
-    		if (Areas.getEnemyDead(Areas.getArea())) {
+    		if (!Areas.getEnemyDead(Areas.getArea())) {
     	        switch (Areas.getArea()) {
 	    	        case 1:
 	                	pickUpItem(Areas.getArea());
@@ -267,7 +267,7 @@ public class Action extends FantasyRace {
     public static void goNorth() {
     	System.out.println("goNorth() -- Pressed button to go North");
     	if (!Action.getPlayerDead()) {
-    		if (Areas.getEnemyDead(Areas.getArea())) {
+    		if (!Areas.getEnemyDead(Areas.getArea())) {
     	        switch (Areas.getArea()) {
     	            case 0:
 	                	pickUpItem(Areas.getArea());
@@ -359,7 +359,7 @@ public class Action extends FantasyRace {
     public static void goSouth() {
     	System.out.println("goSouth() -- Pressed button to go South");
     	if (!Action.getPlayerDead()) {
-    		if (Areas.getEnemyDead(Areas.getArea())) {
+    		if (!Areas.getEnemyDead(Areas.getArea())) {
     	        switch (Areas.getArea()) {
     	            case 2:
 	                	pickUpItem(Areas.getArea());
