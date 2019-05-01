@@ -21,9 +21,8 @@ public class IvyGamesDungeonGame {
     // start IvyGames Dungeon Game!
     public static void startGame() { 
         // set starting area
+    	AreaDefinition.setupAreaDefinitions();
         Areas.setArea(0);
         Areas.activateArea();
-        
-        
     }
 }
