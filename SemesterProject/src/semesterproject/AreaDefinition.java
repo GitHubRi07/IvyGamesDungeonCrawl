@@ -7,7 +7,7 @@
  *  Version:     1.0
  *  Date:        4/5/2019
  *  Description: This class contains the methods that set the description for each room.
-                 The description is then sent to the player's output view.
+ *		 The description is then sent to the player's output view.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
