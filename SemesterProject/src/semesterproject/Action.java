@@ -6,8 +6,8 @@
 
  *  Version:     1.0
  *  Date:        4/5/2019
- *  Description: This class contains the methods needed for the actions that a player 
- 		 can take. 
+ *  Description: This class contains the methods needed for the actions that a player
+ * 		 can take. 
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
