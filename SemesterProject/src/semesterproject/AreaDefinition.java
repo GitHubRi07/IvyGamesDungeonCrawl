@@ -14,7 +14,6 @@
 package semesterproject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -48,12 +47,12 @@ public class AreaDefinition {
         firstFileLineIndex = 0;
         try {
             // set area description files
-            areaFirstDescriptionFilePath = new File("src/semesterProject/firstAreaDescriptions.txt");
-            areaDescriptionFilePath = new File("src/semesterProject/areaDescriptions.txt");
+            areaFirstDescriptionFilePath = new File("src/semesterproject/firstAreaDescriptions.txt");
+            areaDescriptionFilePath = new File("src/semesterproject/areaDescriptions.txt");
         	System.out.println(areaFirstDescriptionFilePath);
         	System.out.println(areaDescriptionFilePath);
             
-            // create a scanner for the descrition files
+            // create a scanner for the description files
             Scanner firstDescriptionscanner = new Scanner(areaFirstDescriptionFilePath);
             Scanner descriptionScanner = new Scanner(areaDescriptionFilePath);
             System.out.println("\n\nFirst Time Area Descriptions.");
@@ -76,9 +75,9 @@ public class AreaDefinition {
             descriptionScanner.close();
         } catch (IOException ex) {
             if ((!areaFirstDescriptionFilePath.exists()) || (areaFirstDescriptionFilePath.isDirectory())) {
-                System.out.println("The file at:" + areaFirstDescriptionFilePath + " does exist or can not be found.");
+                System.out.println("The file at: " + areaFirstDescriptionFilePath + " does exist or can not be found.");
             } else if (!areaDescriptionFilePath.exists() || (areaDescriptionFilePath.isDirectory())) {
-                System.out.println("The file at:" + areaDescriptionFilePath + " does exist or can not be found.");
+                System.out.println("The file at: " + areaDescriptionFilePath + " does exist or can not be found.");
             } else {
                 System.out.println("\nException: " + ex + "\n");
                 ex.printStackTrace();
@@ -98,16 +97,3 @@ public class AreaDefinition {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
