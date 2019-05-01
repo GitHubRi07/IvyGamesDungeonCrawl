@@ -8,8 +8,8 @@
  *  Date:        4/5/2019
  *  Description: IvyTech Dungeon Game is a game where the player finds a suspicious cave entrance, then enter the dungeon.
  *               The dungeon contains enemies and treasures. The player fights their way through many dungeon rooms
- *  			 and collects upgrades along the way. The player wins the game by making their way to the boss 
- *  			 room and defeating that boss.
+ *               and collects upgrades along the way. The player wins the game by making their way to the boss
+ *               room and defeating that boss.
  *               This class's single method gets called to activate the starting point of the game.                 
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
