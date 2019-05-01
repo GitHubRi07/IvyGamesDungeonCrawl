@@ -6,7 +6,7 @@
 
  *  Version:     1.0
  *  Date:        4/5/2019
- *  Description: 
+ *  Description: This class is used to test the functions of the game. 
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
