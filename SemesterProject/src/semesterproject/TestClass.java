@@ -158,7 +158,7 @@ public class TestClass {
     		} else if (FantasyRace.getEnemyHealth() <= 0) {
     			Areas.setEnemyDead(Areas.getArea());
     		} else if (FantasyRace.getCharacterHealth() <= 0) {
-    			Action.isCharacterDead();
+    			Action.characterDied();
     		}
     	}
     }
