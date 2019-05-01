@@ -35,17 +35,17 @@ public class Action extends FantasyRace {
     
     // setters
     public static void changeCharacterHealth(int i) {
-        characterHealth = characterHealth + i;
+        characterHealth += i;
         String newHealthString = Integer.toString(characterHealth);
         SemesterProject.constitutionTF.setText(newHealthString);
     }
     public static void changeCharacterAttack(int i) {
-        characterAttack = characterAttack + i;
+        characterAttack += i;
         String newAttackString = Integer.toString(characterAttack);
         SemesterProject.strengthTF.setText(newAttackString);
     }
     public static void changeCharacterSpeed(int i) {
-        characterSpeed = characterSpeed + i;
+        characterSpeed += i;
         String newSpeedString = Integer.toString(characterSpeed);
         SemesterProject.dexterityTF.setText(newSpeedString);
     }
@@ -57,6 +57,7 @@ public class Action extends FantasyRace {
     
     // methods
     public static void goWest() {
+    	System.out.println("goWest() -- Pressed button to go West");
     	if (!Action.getPlayerDead()) {
     		if (Areas.getEnemyDead(Areas.getArea())) {
                 switch (Areas.getArea()) {
@@ -160,6 +161,7 @@ public class Action extends FantasyRace {
     
     
     public static void goEast() {
+    	System.out.println("goEast() -- Pressed button to go East");
     	if (!Action.getPlayerDead()) {
     		if (Areas.getEnemyDead(Areas.getArea())) {
     	        switch (Areas.getArea()) {
@@ -263,6 +265,7 @@ public class Action extends FantasyRace {
     
     
     public static void goNorth() {
+    	System.out.println("goNorth() -- Pressed button to go North");
     	if (!Action.getPlayerDead()) {
     		if (Areas.getEnemyDead(Areas.getArea())) {
     	        switch (Areas.getArea()) {
@@ -349,11 +352,12 @@ public class Action extends FantasyRace {
     	                SemesterProject.storyOutputTF.appendText("\nYou can't go North.\n");
     	        }
     	    } else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
-    	}        
+    	}
     }
     
     
     public static void goSouth() {
+    	System.out.println("goSouth() -- Pressed button to go South");
     	if (!Action.getPlayerDead()) {
     		if (Areas.getEnemyDead(Areas.getArea())) {
     	        switch (Areas.getArea()) {
@@ -440,11 +444,12 @@ public class Action extends FantasyRace {
     	                SemesterProject.storyOutputTF.appendText("\nYou can't go South.\n");
     	        }
     		} else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here! Run or Attack!\n\n");}
-    	} 
+    	}
     }
     
     
     public static void attack() {
+    	System.out.println("attack() -- Pressed button to Attack");
     	characterHealth = FantasyRace.getCharacterHealth();
         characterAttack = FantasyRace.getCharacterAttackPower();
         characterSpeed = FantasyRace.getCharacterSpeed();
@@ -475,8 +480,9 @@ public class Action extends FantasyRace {
     			SemesterProject.storyOutputTF.appendText("\nFoe has " + enemyHealth + " health remaining.\n");
     		} else if (enemyHealth <= 0) {
     			Areas.setEnemyDead(Areas.getArea());
+    			SemesterProject.storyOutputTF.appendText("\nYou killed the enemy!\n");
     		} else if (characterHealth <= 0) {
-    			isCharacterDead();
+    			characterDied();
     		}
     	}
     }
@@ -486,6 +492,7 @@ public class Action extends FantasyRace {
     // determine percent chance of being able to run based on speed
     // if unsuccessful, initiate another round of attack()
     public static void run() {
+    	System.out.println("run() -- Pressed button to Run");
         if (!getPlayerDead()) {
             if (!Areas.getEnemyDead(Areas.getArea())) { 
                 int runChance = (int) (Math.random()*100);
@@ -525,6 +532,7 @@ public class Action extends FantasyRace {
     
     
     private static void pickUpItem(int roomNum) {
+    	System.out.println("pickUpItem() -- Activated function to pick up item.");
     	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {
 	    	// set stats for the item that the user picks up
 	    	String item = Areas.getItemName();
@@ -533,228 +541,229 @@ public class Action extends FantasyRace {
 					hpChange=0;
 					atkChange=1;
 					spdChange=1;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked up a Dagger. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked up a Dagger. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Longsword":
 					hpChange=0;
 					atkChange=3;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Longsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Longsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Buckler":
 					hpChange=3;
 					atkChange=0;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Buckler. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Buckler. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Plate Armor":
 					hpChange=5;
 					atkChange=0;
 					spdChange=-2;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Plate Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Plate Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Leather Armor":
 					hpChange=2;
 					atkChange=0;
 					spdChange=2;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Leather Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Leather Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Thief Idol":
 					hpChange=0;
 					atkChange=2;
 					spdChange=4;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Thief Idol. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Thief Idol. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Berserker Stone":
 					hpChange=-5;
 					atkChange=10;
 					spdChange=3;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Berserker Stone. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Berserker Stone. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Great Axe":
 					hpChange=0;
 					atkChange=5;
 					spdChange=-2;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Great Axe. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Great Axe. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Nibbles, the House Cat":
 					hpChange=1;
 					atkChange=1;
 					spdChange=1;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Nibbles, the House Cat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Nibbles, the House Cat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Priestly Vestments":
 					hpChange=10;
 					atkChange=-5;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Priestly Vestments. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Priestly Vestments. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Rapier":
 					hpChange=0;
 					atkChange=3;
 					spdChange=3;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Rapier. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Rapier. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Hammer":
 					hpChange=0;
 					atkChange=2;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Hammer. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Hammer. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Well-Crafted Boots":
 					hpChange=1;
 					atkChange=0;
 					spdChange=3;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Some Well-Crafted Boots. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Some Well-Crafted Boots. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Assassin Gloves":
 					hpChange=0;
 					atkChange=3;
 					spdChange=5;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Assassin Gloves. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Assassin Gloves. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Spiffy Hat":
 					hpChange=2;
 					atkChange=2;
 					spdChange=2;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Spiffy Hat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Spiffy Hat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Sack Lunch":
 					hpChange=5;
 					atkChange=0;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up a Sack Lunch. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up a Sack Lunch. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Embarrassing Photos":
 					hpChange=-3;
 					atkChange=-3;
 					spdChange=3;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Some Embarrassing Photos. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Some Embarrassing Photos. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Some Self-Esteem":
 					hpChange=5;
 					atkChange=5;
 					spdChange=5;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Some Self-Esteem. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Some Self-Esteem. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Miniature Mother-in-Law": 
 					hpChange=3;
 					atkChange=-3;
 					spdChange=-5;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Your Miniature Mother-in-Law. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Your Miniature Mother-in-Law. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Elven Nutcracker":
 					hpChange=0;
 					atkChange=1;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Elven Nutcracker. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Elven Nutcracker. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Vorpal Sword":
 					hpChange=0;
 					atkChange=5;
 					spdChange=7;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Vorpal Sword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Vorpal Sword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Yoga Pants":
 					hpChange=1;
 					atkChange=0;
 					spdChange=5;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Yoga Pants. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Yoga Pants. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Book of Mormon":
 					hpChange=0;
 					atkChange=0;
 					spdChange=0;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Book of Mormon. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Book of Mormon. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Gladius, Fair Broadsword":
 					hpChange=1;
 					atkChange=8;
 					spdChange=3;
-					Action.changeCharacterHealth(hpChange);
-					Action.changeCharacterAttack(atkChange);
-					Action.changeCharacterSpeed(spdChange);
-					System.out.println("Picked Up Gladius, Fair Broadsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					changeCharacterHealth(hpChange);
+					changeCharacterAttack(atkChange);
+					changeCharacterSpeed(spdChange);
+					System.out.println("pickUpItem() -- Picked Up Gladius, Fair Broadsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 			}
 	    	Areas.setGottenItem(roomNum);
     	} else {
-    		System.out.println("There is no item here.");
+    		System.out.println("pickUpItem() -- There is no item here.");
     	}
     }
 
     
     // allow player to retreat to the previous room they were in
     public static boolean gotAway(boolean run) {
+    	System.out.println("gotAway() -- Activated function to set got away.");
          if (run = true) {
         	 pickUpItem(Areas.getArea());
              Areas.setArea(Areas.getLastArea());             
@@ -763,7 +772,8 @@ public class Action extends FantasyRace {
     }
     
     
-    public static void isCharacterDead() {
+    public static void characterDied() {
+    	System.out.println("characterDied() -- Activated function to set character dead.");
             // output that character is dead
             // end the game or restart
             SemesterProject.storyOutputTF.appendText("\nYou Died!\n");
@@ -773,6 +783,7 @@ public class Action extends FantasyRace {
     
      
     public static void youWin() {
+    	System.out.println("youWin() -- Activated function to set you won.");
         // set end game message
         SemesterProject.storyOutputTF.appendText("\nYou completed the dungeon!\n");
     }
