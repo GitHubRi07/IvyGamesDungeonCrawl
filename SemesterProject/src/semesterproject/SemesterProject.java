@@ -14,6 +14,7 @@ package semesterproject;
 
 
 import java.io.File;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,16 +32,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 
 
 public class SemesterProject extends Application {
+	
+	// declare application properties
+    private static final String TITLE = "IvyGames' SoftwareProduct:  Dungeon!";
+    final String AREA_DEFINITION_FILE = "areaDescriptions.txt";
+    private final String FONT_NAME = "Consolas";
+    private final int FONT_SIZE = 10;
+	    
     // buttons
-    private Button goWestBT = new Button("Go West");
-    private Button goEastBT = new Button("Go East");
-    private Button goNorthBT = new Button("Go North");
-    private Button goSouthBT = new Button("Go South");
-    private Button attackBT = new Button("Attack");
-    private Button runBT = new Button("Run");
+    private static Button goWestBT = new Button("Go West");
+    private static Button goEastBT = new Button("Go East");
+    private static Button goNorthBT = new Button("Go North");
+    private static Button goSouthBT = new Button("Go South");
+    private static Button attackBT = new Button("Attack");
+    private static Button runBT = new Button("Run");
     
     // labels
     private Label strengthLB = new Label("Attack Power:");
@@ -64,9 +73,9 @@ public class SemesterProject extends Application {
     private int statSize = 50;
     
     // set boolean to stop 'selectRace()' function after game is started
-    static boolean raceSelected = false;
+    static boolean raceSelected;
     // set boolean to stop 'startGame()' function after game is started
-    static boolean gameStarted = false;
+    static boolean gameStarted;
     
     // GUI
     @Override
@@ -108,14 +117,6 @@ public class SemesterProject extends Application {
         // add output textfield to bottom box inside inner borderpane
         storyOutputHBox.getChildren().add(storyOutputTF);
         
-        // add button functions
-        goWestBT.setOnAction(e -> Action.goWest());
-        goEastBT.setOnAction(e -> Action.goEast());
-        goNorthBT.setOnAction(e -> Action.goNorth());
-        goSouthBT.setOnAction(e -> Action.goSouth());
-        attackBT.setOnAction(e -> Action.attack());
-        runBT.setOnAction(e -> Action.run());
-        
         // properties
         // set textfields to read-only
         strengthTF.setEditable(false);
@@ -153,14 +154,15 @@ public class SemesterProject extends Application {
         mapIV.setPreserveRatio(true);
         mapIV.setSmooth(true);
         mapIV.setCache(true);
-        // column length
+        // story output text view settings
         storyOutputTF.setWrapText(true);
+		storyOutputTF.setFont(Font.font(FONT_NAME, FONT_SIZE));
         
         // create a scene and put it on stage
         Scene scene = new Scene(outerBorderPane);
         primaryStage.setMinHeight(650);
         primaryStage.setMinWidth(700);
-        primaryStage.setTitle("Escape!");
+        primaryStage.setTitle(TITLE);
         primaryStage.setScene(scene);
         primaryStage.show();        
         
@@ -177,53 +179,57 @@ public class SemesterProject extends Application {
     
     public static void runGame() {
         // welcome player
-        storyOutputTF.appendText("Welcome to Escape!\n");
-        
-        // choose race
-        storyOutputTF.appendText("\nChoose a race.\nYou can be a human, an elf,"
-                + " or a dwarf.\nEach race has different stats.\n");
-        storyOutputTF.appendText("Enter 'h', 'e', or 'd'. Without the quotes"
-                + " to choose between them.\n\n");
-        storyOutputTF.appendText("Press the 'Enter' key to start the game once "
-                + "you've selected your race.\n\n");
-        selectRace();
-        
+        storyOutputTF.appendText("Welcome to " + TITLE + "!\n");
+        storyOutputTF.appendText("An IvyGames Adventure.\n");
+        storyOutputTF.appendText("Prepare to delve deep into a wicked cave full of perils and rewards.\n\n");
+        // allow player to select their fantasy race
+        selectRace();        
         // start game when enter is pressed
         startGame();
     }
     
     
     // select race and set stats
-    public static void selectRace() { 
-            storyOutputTF.setOnKeyTyped((KeyEvent event) -> {
-                String input = event.getCharacter();
-                if (!raceSelected) {
-                    
-                    if (("h".equals(input)) || ("H".equals(input))) {
-                        storyOutputTF.appendText("\nYou chose Human. - ");
-                        Human human = new Human();
-                        human.setHumanStats();
-                        setStats();
-                    }
-                    if (("e".equals(input)) || ("E".equals(input))) {
-                        storyOutputTF.appendText("\nYou chose Elf. - ");
-                        Elf elf = new Elf();
-                        elf.setElfStats();
-                        setStats();
-                    }
-                    if (("d".equals(input)) || ("D".equals(input))) {
-                        storyOutputTF.appendText("\nYou chose Dwarf. - ");
-                        Dwarf dwarf = new Dwarf();
-                        dwarf.setDwarfStats();
-                        setStats();
-                    }
+    public static void selectRace() {
+    	// tell player how to choose race
+        storyOutputTF.appendText("\nChoose a race."
+        		+ "\nYou can be a human, an elf, or a dwarf."
+        		+ "\nEach race has different stats.\n");
+        storyOutputTF.appendText("Choose wisely, as you can only make this decision once.\n");
+        storyOutputTF.appendText("Enter the key 'h', 'e', or 'd' to choose Human, Elf, or Dwarf respectively.\n\n");
+        storyOutputTF.appendText("Press the 'Enter' key to start the game once you have selected your race.\n\n");
+        // take player input to select race
+        storyOutputTF.setOnKeyTyped((KeyEvent selectRaceEvent) -> {
+            String input = selectRaceEvent.getCharacter();
+            if (!raceSelected) {
+                if (("h".equals(input)) || ("H".equals(input))) {
+                    storyOutputTF.appendText("\nYou chose Human. - ");
+                    Human human = new Human();
+                    human.setHumanStats();
+                    setStatsTextField();
+                    raceSelected = true;
                 }
-            });
+                if (("e".equals(input)) || ("E".equals(input))) {
+                    storyOutputTF.appendText("\nYou chose Elf. - ");
+                    Elf elf = new Elf();
+                    elf.setElfStats();
+                    setStatsTextField();
+                    raceSelected = true;
+                }
+                if (("d".equals(input)) || ("D".equals(input))) {
+                    storyOutputTF.appendText("\nYou chose Dwarf. - ");
+                    Dwarf dwarf = new Dwarf();
+                    dwarf.setDwarfStats();
+                    setStatsTextField();
+                    raceSelected = true;
+                }                
+            }
+        });
     }
     
     
     // set the attack, speed, and health text fields
-    public static void setStats() { 
+    public static void setStatsTextField() { 
         String str = Integer.toString(FantasyRace.getCharacterAttackPower());
         String dex = Integer.toString(FantasyRace.getCharacterSpeed());
         String con = Integer.toString(FantasyRace.getCharacterHealth());
@@ -234,20 +240,44 @@ public class SemesterProject extends Application {
     
     
     // start game when enter is pressed
-    public static void startGame() { 
-        storyOutputTF.setOnKeyPressed((KeyEvent event) -> {
+    public static void startGame() {
+    	storyOutputTF.setOnKeyPressed((KeyEvent event) -> {
             KeyCode key = event.getCode();
-            if (!gameStarted) { 
-                if (key.equals(KeyCode.ENTER)) {
-                    storyOutputTF.appendText("\n\n");
-                    IvyGamesDungeonGame.startGame();
-                    raceSelected = true;
-                    gameStarted = true;
+            if (!gameStarted) {
+                if (raceSelected) {
+                    if (key.equals(KeyCode.ENTER)) {
+                        storyOutputTF.appendText("\n\n");
+                        gameStarted = true;
+                        IvyGamesDungeonGame.startGame();
+                        activateMovementFunctions();
+                    }
                 }
-            }
+            }            
         });
     }
     
+    private static void activateMovementFunctions() {
+    	// add button functions after game starts
+        goNorthBT.setOnAction(e -> Action.goNorth());
+        goEastBT.setOnAction(e -> Action.goEast());
+        goSouthBT.setOnAction(e -> Action.goSouth());
+        goWestBT.setOnAction(e -> Action.goWest());
+        attackBT.setOnAction(e -> Action.attack());
+        runBT.setOnAction(e -> Action.run());
+        // add button functions to respond to arrow keys
+        storyOutputTF.setOnKeyPressed((KeyEvent event) -> {
+        	KeyCode key = event.getCode();
+        	if (key.equals(KeyCode.UP)) {
+        		Action.goNorth();
+        	} else if (key.equals(KeyCode.RIGHT)) {
+        		Action.goEast();
+        	} else if (key.equals(KeyCode.DOWN)) {
+        		Action.goSouth();
+        	} else if (key.equals(KeyCode.LEFT)) {
+        		Action.goWest();
+        	}
+        });
+   }
     
     public static void main(String[] args) {
         // launch GUI     
