@@ -32,6 +32,7 @@ public class Areas {
     private static boolean[] beenTo = new boolean[26];
     private static boolean[] hasItem = new boolean[26];
     private static boolean[] gottenItem = new boolean[26];
+    private static boolean[] hasEnemy = new boolean[26];
     private static boolean[] enemyDead = new boolean[26];
     private static Areas[] roomsArray = new Areas[26];
     private static File roomImagePath;
@@ -47,11 +48,18 @@ public class Areas {
 		
 	}
 	Areas(int roomNum) {
+		System.out.println("Areas() -- activated function to create a new area.");
 		int area = roomNum;
+		System.out.println("Areas() -- Room Area: " + area);
+		// if room0, starting area, set to not have any enemies
+		if (roomNum == 0) {
+			
+		}
 		// check if hey have been to the room before
 		// if not, determine if this room has an item and set enemies
 		if (!beenTo[area]) {
 			determineIfHasItem(area);
+			determineIfHasEnemy(area);
 			generateEnemies(area);
 			setAreaMessage(area);
 			setRoomImage(area);
@@ -63,7 +71,7 @@ public class Areas {
 			int itemNum = randomGenerator.nextInt(24);
 			setItemName(itemNum);
 		}
-		System.out.println("Area " + roomNum + " Created.");
+		System.out.println("Areas() -- Area " + roomNum + " Created.");
 	}
     
 	
@@ -77,6 +85,9 @@ public class Areas {
     public static String getItemName() {
     	return itemName;
     }
+    public static boolean getHasEnemy(int roomNum) {
+    	return hasEnemy[roomNum];
+    }
     public static boolean getEnemyDead(int roomNum) {
     	return enemyDead[roomNum];
     }
@@ -86,7 +97,6 @@ public class Areas {
     public static boolean getGottenItem(int roomNum) {
     	return gottenItem[roomNum];
     }
-    
     
     //setters
     public static void setArea(int newArea) {
@@ -113,6 +123,9 @@ public class Areas {
     	Image RoomPic = new Image(roomImagePathString);
     	SemesterProject.mapIV.setImage(RoomPic);
     }
+    public static void setHasEnemy(int roomNum) {
+    	hasEnemy[roomNum] = true;
+    }
     public static void setEnemyDead(int roomNum) {
     	enemyDead[roomNum] = true;
     }
@@ -132,6 +145,7 @@ public class Areas {
     	// Display first time area message
     // If not the first time to the room, set room image and message
     public static void activateArea() {
+    	System.out.println("activateArea() -- Activated function to create an area, or display its image & message.");
     	switch (getArea()) {
     		case 0:
     			if (!beenTo[0]) {
@@ -346,47 +360,64 @@ public class Areas {
     
     
     private void determineIfHasItem(int roomNum) {
+    	System.out.println("determineIfHasItem() -- Activated function to determine if a room has an item.");
     	if (getArea() != 0) {
     		int percentChance = (int) Math.ceil(Math.random()*100);
         	if (percentChance > 20) {
         		setHasItem(roomNum);
-        		System.out.println("There is an item here.");
+        		System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
         	}
     	}
     }
     
-    public static void generateEnemies(int roomNum) {    	
-    	if (roomsArray[roomNum] != roomsArray[0]) {
-    		// code to set the enemies for the specific room
-    		int randomInt = randomGenerator.nextInt(3) + 1;
-    		switch (randomInt) {
-    		case 1:
-    			goblin = new Goblin();
-    			goblin.setGoblinStats();
-    			SemesterProject.storyOutputTF.appendText("\nThere is a Goblin!");
-        		System.out.println("Enemies Here: " + goblin);
-    			break;
-    		case 2:
-    			orc = new Orc();
-    			orc.setOrcStats();
-    			SemesterProject.storyOutputTF.appendText("\nThere is an Orc!");
-        		System.out.println("Enemies Here: " + orc);
-    			break;
-    		case 3:
-    			ogre = new Ogre();
-    			ogre.setOgreStats();
-    			SemesterProject.storyOutputTF.appendText("\nThere is an Ogre!");
-        		System.out.println("Enemies Here: " + ogre);
-    			break;
-    		}
-    		System.out.println("Enemies Here: " + orc);
-    	} else if (roomsArray[roomNum] == roomsArray[11]) {
-    		// set boss room enemy
-    		boss = new Boss();
-    		boss.setBossStats();
-    		System.out.println("Enemies Here: " + boss);
+    private void determineIfHasEnemy(int roomNum) {
+    	System.out.println("determineIfHasEnemy() -- Activated function to determine if a room has an enemy.");
+    	if (getArea() != 0) {
+    		int percentChance = (int) Math.ceil(Math.random()*100);
+        	if (percentChance > 20) {
+        		setHasEnemy(roomNum);
+        		System.out.println("determineIfHasEnemy() -- there is an enemy in room: " + roomNum);
+        	}
+    	} else if (getArea() == 11) {
+    		setHasEnemy(roomNum);
+    		System.out.print("determineIfHasEnemy() -- Boss enemy");
     	}
-    	
     }
     
+    public static void generateEnemies(int roomNum) {
+    	System.out.println("generateEnemies() -- Activated function to generate enemies.");
+    	if (hasEnemy[roomNum] == true) {
+    		System.out.println("generateEnemies() -- There is an enemy in room: " + roomNum);
+    		if (roomNum == 11) {
+    	    	System.out.println("generateEnemies() -- room number equal to 11: " + (roomNum == 11));
+        		// set boss room enemy
+        		boss = new Boss();
+        		boss.setBossStats();
+        		System.out.println("generateEnemies() -- Enemies Here: " + boss);
+    		} else {
+    			// code to set the enemies for the specific room
+        		int randomInt = randomGenerator.nextInt(3) + 1;
+        		switch (randomInt) {
+        		case 1:
+        			goblin = new Goblin();
+        			goblin.setGoblinStats();
+        			SemesterProject.storyOutputTF.appendText("\nThere is a Goblin!");
+            		System.out.println("generateEnemies() -- Enemies Here: " + goblin);
+        			break;
+        		case 2:
+        			orc = new Orc();
+        			orc.setOrcStats();
+        			SemesterProject.storyOutputTF.appendText("\nThere is an Orc!");
+            		System.out.println("generateEnemies() -- Enemies Here: " + orc);
+        			break;
+        		case 3:
+        			ogre = new Ogre();
+        			ogre.setOgreStats();
+        			SemesterProject.storyOutputTF.appendText("\nThere is an Ogre!");
+            		System.out.println("generateEnemies() -- Enemies Here: " + ogre);
+        			break;
+        		}
+    		}
+    	}
+    }
 }
