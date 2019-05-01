@@ -6,9 +6,9 @@
 
  *  Version:     1.0
  *  Date:        4/5/2019
- *  Description: This class creates the user interface for the program. It contains 
- 		 methods that assign the player a race based on input, set the 
-		 movement functions, and calls for the game to start.
+ *  Description: This class creates the user interface for the program. It contains
+ *		 methods that assign the player a race based on input, set the 
+ *		 movement functions, and calls for the game to start.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
