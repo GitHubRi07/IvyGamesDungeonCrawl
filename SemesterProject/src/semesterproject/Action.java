@@ -1,19 +1,30 @@
-// IvyTech Dungeon Game
-// Riley Tucker, Aiden Hutton
-// Karen Stackhouse, Christopher Fields
-// Created On 4/18/2019
+/**
+ *  Application: IvyGames_SoftwareProduct
+ *  Description: Take user through a 'choose your own adventure' style story.  
+ *  Title:       SoftwareProduct
+ *  Authors:       Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
+
+ *  Version:     1.0
+ *  Date:        4/5/2019
+ *  Description: 
+ *  Assignment:  SDEV265  System - Software Analysis and Projects
+ * 
+ */
 package semesterproject;
 
 
 public class Action extends FantasyRace {
     // global variables
     private static boolean playerDead;
-    private static int characterHealth = getCharacterHealth();
-    private static int characterAttack = getCharacterAttackPower();
-    private static int characterSpeed = getCharacterSpeed();
-    private static int enemyHealth = getEnemyHealth();
-    private static int enemyAttack = getEnemyAttackPower();
-    private static int enemySpeed = getEnemySpeed();
+    private static int characterHealth;
+    private static int characterAttack;
+    private static int characterSpeed;
+    private static int enemyHealth;
+    private static int enemyAttack;
+    private static int enemySpeed;
+    private static int hpChange;
+	private static int atkChange;
+	private static int spdChange;
     
     
     // getters
@@ -46,354 +57,424 @@ public class Action extends FantasyRace {
     
     // methods
     public static void goWest() {
-        if (!Action.getPlayerDead()) {
-            switch (Areas.getArea()) {
-            case 2:
-            	Areas.setLastArea(2);
-            	Areas.setArea(1);
-            	Areas.activateArea();
-                break;
-            case 3:
-            	Areas.setLastArea(3);
-            	Areas.setArea(2);
-            	Areas.activateArea();
-                break;
-            case 9:
-            	Areas.setLastArea(9);
-            	Areas.setArea(8);
-            	Areas.activateArea();
-                break;
-            case 10:
-            	Areas.setLastArea(10);
-            	Areas.setArea(9);
-            	Areas.activateArea();
-                break;
-            case 11:
-            	Areas.setLastArea(11);
-            	Areas.setArea(10);
-            	Areas.activateArea();
-                break;
-            case 12:
-            	Areas.setLastArea(12);
-            	Areas.setArea(11);
-            	Areas.activateArea();
-                break;
-            case 13:
-            	Areas.setLastArea(13);
-            	Areas.setArea(12);
-            	Areas.activateArea();
-                break;
-            case 14:
-            	Areas.setLastArea(14);
-            	Areas.setArea(13);
-            	Areas.activateArea();
-                break;
-            case 16:
-            	Areas.setLastArea(16);
-            	Areas.setArea(15);
-            	Areas.activateArea();
-                break;
-            case 17:
-            	Areas.setLastArea(17);
-            	Areas.setArea(16);
-            	Areas.activateArea();
-                break;
-            case 21:
-            	Areas.setLastArea(21);
-            	Areas.setArea(20);
-            	Areas.activateArea();
-                break;
-            case 22:
-            	Areas.setLastArea(22);
-            	Areas.setArea(21);
-            	Areas.activateArea();
-                break;
-            case 23:
-            	Areas.setLastArea(23);
-            	Areas.setArea(22);
-            	Areas.activateArea();
-                break;
-            case 24:
-            	Areas.setLastArea(24);
-            	Areas.setArea(23);
-            	Areas.activateArea();
-                break;
-            case 25:
-            	Areas.setLastArea(25);
-            	Areas.setArea(24);
-            	Areas.activateArea();
-                break;
-            default:
-                // if no other case numbers activate
-                SemesterProject.storyOutputTF.appendText("\nYou can't go West.\n");
-        }
-        }
+    	if (!Action.getPlayerDead()) {
+    		if (Areas.getEnemyDead(Areas.getArea())) {
+                switch (Areas.getArea()) {
+	                case 2:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(2);
+	                	Areas.setArea(1);
+	                	Areas.activateArea();
+	                	break;
+	                case 3:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(3);
+	                	Areas.setArea(2);
+	                	Areas.activateArea();
+	                    break;
+	                case 9:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(9);
+	                	Areas.setArea(8);
+	                	Areas.activateArea();
+	                    break;
+	                case 10:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(10);
+	                	Areas.setArea(9);
+	                	Areas.activateArea();
+	                    break;
+	                case 11:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(11);
+	                	Areas.setArea(10);
+	                	Areas.activateArea();
+	                    break;
+	                case 12:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(12);
+	                	Areas.setArea(11);
+	                	Areas.activateArea();
+	                    break;
+	                case 13:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(13);
+	                	Areas.setArea(12);
+	                	Areas.activateArea();
+	                    break;
+	                case 14:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(14);
+	                	Areas.setArea(13);
+	                	Areas.activateArea();
+	                    break;
+	                case 16:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(16);
+	                	Areas.setArea(15);
+	                	Areas.activateArea();
+	                    break;
+	                case 17:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(17);
+	                	Areas.setArea(16);
+	                	Areas.activateArea();
+	                    break;
+	                case 21:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(21);
+	                	Areas.setArea(20);
+	                	Areas.activateArea();
+	                    break;
+	                case 22:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(22);
+	                	Areas.setArea(21);
+	                	Areas.activateArea();
+	                    break;
+	                case 23:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(23);
+	                	Areas.setArea(22);
+	                	Areas.activateArea();
+	                    break;
+	                case 24:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(24);
+	                	Areas.setArea(23);
+	                	Areas.activateArea();
+	                    break;
+	                case 25:
+	                	pickUpItem(Areas.getArea());
+	                	Areas.setLastArea(25);
+	                	Areas.setArea(24);
+	                	Areas.activateArea();
+	                    break;
+	                default:
+	                    // if no other case numbers activate
+	                    SemesterProject.storyOutputTF.appendText("\nYou can't go West.\n");
+                }
+            } else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
+    	}
     }
     
     
     public static void goEast() {
-        if (!Action.getPlayerDead()) {
-        switch (Areas.getArea()) {
-        case 1:
-        	Areas.setLastArea(1);
-        	Areas.setArea(2);
-        	Areas.activateArea();
-            break;
-        case 2:
-        	Areas.setLastArea(2);
-        	Areas.setArea(3);
-        	Areas.activateArea();
-            break;
-        case 8:
-        	Areas.setLastArea(8);
-        	Areas.setArea(9);
-        	Areas.activateArea();
-            break;
-        case 9:
-        	Areas.setLastArea(9);
-        	Areas.setArea(10);
-        	Areas.activateArea();
-            break;
-        case 10:
-        	Areas.setLastArea(10);
-        	Areas.setArea(11);
-        	Areas.activateArea();
-            break;
-        case 11:
-        	Areas.setLastArea(11);
-        	Areas.setArea(12);
-        	Areas.activateArea();
-            break;
-        case 12:
-        	Areas.setLastArea(12);
-        	Areas.setArea(13);
-        	Areas.activateArea();
-            break;
-        case 13:
-        	Areas.setLastArea(13);
-        	Areas.setArea(14);
-        	Areas.activateArea();
-            break;
-        case 15:
-        	Areas.setLastArea(15);
-        	Areas.setArea(16);
-        	Areas.activateArea();
-            break;
-        case 16:
-        	Areas.setLastArea(16);
-        	Areas.setArea(17);
-        	Areas.activateArea();
-            break;
-        case 20:
-        	Areas.setLastArea(20);
-        	Areas.setArea(21);
-        	Areas.activateArea();
-            break;
-        case 21:
-        	Areas.setLastArea(21);
-        	Areas.setArea(22);
-        	Areas.activateArea();
-            break;
-        case 22:
-        	Areas.setLastArea(22);
-        	Areas.setArea(23);
-        	Areas.activateArea();
-            break;
-        case 23:
-        	Areas.setLastArea(23);
-        	Areas.setArea(24);
-        	Areas.activateArea();
-            break;
-        case 24:
-        	Areas.setLastArea(24);
-        	Areas.setArea(25);
-        	Areas.activateArea();
-            break;
-            default:
-                // if no other case numbers activate
-                SemesterProject.storyOutputTF.appendText("\nYou can't go East.\n");
-        }
-        }
+    	if (!Action.getPlayerDead()) {
+    		if (Areas.getEnemyDead(Areas.getArea())) {
+    	        switch (Areas.getArea()) {
+	    	        case 1:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(1);
+	    	        	Areas.setArea(2);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 2:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(2);
+	    	        	Areas.setArea(3);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 8:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(8);
+	    	        	Areas.setArea(9);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 9:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(9);
+	    	        	Areas.setArea(10);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 10:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(10);
+	    	        	Areas.setArea(11);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 11:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(11);
+	    	        	Areas.setArea(12);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 12:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(12);
+	    	        	Areas.setArea(13);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 13:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(13);
+	    	        	Areas.setArea(14);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 15:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(15);
+	    	        	Areas.setArea(16);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 16:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(16);
+	    	        	Areas.setArea(17);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 20:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(20);
+	    	        	Areas.setArea(21);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 21:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(21);
+	    	        	Areas.setArea(22);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 22:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(22);
+	    	        	Areas.setArea(23);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 23:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(23);
+	    	        	Areas.setArea(24);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	        case 24:
+	                	pickUpItem(Areas.getArea());
+	    	        	Areas.setLastArea(24);
+	    	        	Areas.setArea(25);
+	    	        	Areas.activateArea();
+	    	            break;
+	    	            default:
+	    	                // if no other case numbers activate
+	    	                SemesterProject.storyOutputTF.appendText("\nYou can't go East.\n");
+    	        }
+    		} else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
+    	}
     }
     
     
     public static void goNorth() {
-        if (!Action.getPlayerDead()) {
-        switch (Areas.getArea()) {
-            case 0:
-            	// move north from start
-            	// using area 0 to area 4 from small map as a placeholder
-            	Areas.setLastArea(0);
-            	Areas.setArea(2);
-            	Areas.activateArea();
-                break;
-            case 1:
-            	Areas.setLastArea(1);
-            	Areas.setArea(5);
-            	Areas.activateArea();
-                break;
-            case 3:
-            	Areas.setLastArea(3);
-            	Areas.setArea(6);
-            	Areas.activateArea();
-                break;
-            case 4:
-            	Areas.setLastArea(4);
-            	Areas.setArea(8);
-            	Areas.activateArea();
-                break;
-            case 5:
-            	Areas.setLastArea(5);
-            	Areas.setArea(10);
-            	Areas.activateArea();
-                break;
-            case 6:
-            	Areas.setLastArea(6);
-            	Areas.setArea(12);
-            	Areas.activateArea();
-                break;
-            case 7:
-            	Areas.setLastArea(7);
-            	Areas.setArea(14);
-            	Areas.activateArea();
-                break;
-            case 8:
-            	Areas.setLastArea(8);
-            	Areas.setArea(15);
-            	Areas.activateArea();
-                break;
-            case 9:
-            	Areas.setLastArea(9);
-            	Areas.setArea(16);
-            	Areas.activateArea();
-                break;
-            case 12:
-            	Areas.setLastArea(12);
-            	Areas.setArea(18);
-            	Areas.activateArea();
-                break;
-            case 14:
-            	Areas.setLastArea(14);
-            	Areas.setArea(19);
-            	Areas.activateArea();
-                break;
-            case 16:
-            	Areas.setLastArea(16);
-            	Areas.setArea(20);
-            	Areas.activateArea();
-                break;
-            case 19:
-            	Areas.setLastArea(19);
-            	Areas.setArea(25);
-            	Areas.activateArea();
-                break;
-            default:
-                // if no other case numbers activate
-                SemesterProject.storyOutputTF.appendText("\nYou can't go North.\n");
-        }
-        }
+    	if (!Action.getPlayerDead()) {
+    		if (Areas.getEnemyDead(Areas.getArea())) {
+    	        switch (Areas.getArea()) {
+    	            case 0:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(0);
+    	            	Areas.setArea(2);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 1:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(1);
+    	            	Areas.setArea(5);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 3:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(3);
+    	            	Areas.setArea(6);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 4:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(4);
+    	            	Areas.setArea(8);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 5:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(5);
+    	            	Areas.setArea(10);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 6:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(6);
+    	            	Areas.setArea(12);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 7:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(7);
+    	            	Areas.setArea(14);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 8:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(8);
+    	            	Areas.setArea(15);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 9:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(9);
+    	            	Areas.setArea(16);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 12:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(12);
+    	            	Areas.setArea(18);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 14:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(14);
+    	            	Areas.setArea(19);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 16:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(16);
+    	            	Areas.setArea(20);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 19:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(19);
+    	            	Areas.setArea(25);
+    	            	Areas.activateArea();
+    	                break;
+    	            default:
+    	                // if no other case numbers activate
+    	                SemesterProject.storyOutputTF.appendText("\nYou can't go North.\n");
+    	        }
+    	    } else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
+    	}        
     }
     
     
     public static void goSouth() {
-        if (!Action.getPlayerDead()) {
-        switch (Areas.getArea()) {
-            case 2:
-            	Areas.setLastArea(2);
-            	Areas.setArea(0);
-            	Areas.activateArea();
-                break;
-            case 5:
-            	Areas.setLastArea(5);
-            	Areas.setArea(1);
-            	Areas.activateArea();
-                break;
-            case 6:
-            	Areas.setLastArea(6);
-            	Areas.setArea(3);
-            	Areas.activateArea();
-                break;
-            case 8:
-            	Areas.setLastArea(8);
-            	Areas.setArea(4);
-            	Areas.activateArea();
-                break;
-            case 10:
-            	Areas.setLastArea(10);
-            	Areas.setArea(5);
-            	Areas.activateArea();
-                break;
-            case 12:
-            	Areas.setLastArea(12);
-            	Areas.setArea(6);
-            	Areas.activateArea();
-                break;
-            case 14:
-            	Areas.setLastArea(14);
-            	Areas.setArea(7);
-            	Areas.activateArea();
-                break;
-            case 15:
-            	Areas.setLastArea(15);
-            	Areas.setArea(8);
-            	Areas.activateArea();
-                break;
-            case 16:
-            	Areas.setLastArea(16);
-            	Areas.setArea(9);
-            	Areas.activateArea();
-                break;
-            case 18:
-            	Areas.setLastArea(18);
-            	Areas.setArea(12);
-            	Areas.activateArea();
-                break;
-            case 19:
-            	Areas.setLastArea(19);
-            	Areas.setArea(14);
-            	Areas.activateArea();
-                break;
-            case 20:
-            	Areas.setLastArea(20);
-            	Areas.setArea(16);
-            	Areas.activateArea();
-                break;
-            case 25:
-            	Areas.setLastArea(25);
-            	Areas.setArea(19);
-            	Areas.activateArea();
-                break;
-            default:
-                // if no other case numbers activate
-                SemesterProject.storyOutputTF.appendText("\nYou can't go South.\n");                   
-        }
-        }
+    	if (!Action.getPlayerDead()) {
+    		if (Areas.getEnemyDead(Areas.getArea())) {
+    	        switch (Areas.getArea()) {
+    	            case 2:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(2);
+    	            	Areas.setArea(0);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 5:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(5);
+    	            	Areas.setArea(1);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 6:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(6);
+    	            	Areas.setArea(3);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 8:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(8);
+    	            	Areas.setArea(4);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 10:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(10);
+    	            	Areas.setArea(5);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 12:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(12);
+    	            	Areas.setArea(6);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 14:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(14);
+    	            	Areas.setArea(7);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 15:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(15);
+    	            	Areas.setArea(8);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 16:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(16);
+    	            	Areas.setArea(9);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 18:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(18);
+    	            	Areas.setArea(12);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 19:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(19);
+    	            	Areas.setArea(14);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 20:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(20);
+    	            	Areas.setArea(16);
+    	            	Areas.activateArea();
+    	                break;
+    	            case 25:
+	                	pickUpItem(Areas.getArea());
+    	            	Areas.setLastArea(25);
+    	            	Areas.setArea(19);
+    	            	Areas.activateArea();
+    	                break;
+    	            default:
+    	                // if no other case numbers activate
+    	                SemesterProject.storyOutputTF.appendText("\nYou can't go South.\n");
+    	        }
+    		} else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here! Run or Attack!\n\n");}
+    	} 
     }
     
     
     public static void attack() {
-    	if (!Action.getPlayerDead()) {
+    	characterHealth = FantasyRace.getCharacterHealth();
+        characterAttack = FantasyRace.getCharacterAttackPower();
+        characterSpeed = FantasyRace.getCharacterSpeed();
+        enemyHealth = FantasyRace.getEnemyHealth();
+        enemyAttack = FantasyRace.getEnemyAttackPower();
+        enemySpeed = FantasyRace.getEnemySpeed();
+    	if (!getPlayerDead()) {
     		if ((enemyHealth > 0) && (characterHealth > 0)) {
     			int characterAttackDamage;
     			int enemyAttackDamage;
-            
-    			if (characterSpeed < enemySpeed) {
+    			// character or enemy gets two attacks (attack damage x2) if speed is more than, or equal to, 
+    			// double the opponent's speed. Otherwise, they each only get x1 attack speed.            
+    			if ((characterSpeed*2) <= enemySpeed) {
     				characterAttackDamage = characterAttack;
     				enemyAttackDamage = enemyAttack * 2;
-    			} else if (characterSpeed > enemySpeed){
+    			} else if (characterSpeed >= (enemySpeed*2)){
     				characterAttackDamage = characterAttack * 2;
     				enemyAttackDamage = enemyAttack;
     			} else {
     				characterAttackDamage = characterAttack;
-         	      enemyAttackDamage = enemyAttack;
-    			}            
+    				enemyAttackDamage = enemyAttack;
+    			}
     			enemyHealth -= characterAttackDamage;
-    			setEnemyHealth(enemyHealth);
-    			Action.changeCharacterHealth(-enemyAttackDamage);
+    			characterHealth -= enemyAttackDamage;
+    			FantasyRace.setEnemyHealth(enemyHealth);
+    			FantasyRace.setCharacterHealth(characterHealth);
     			SemesterProject.storyOutputTF.appendText("\nDealt " + characterAttackDamage + " damage\n");
     			SemesterProject.storyOutputTF.appendText("\nFoe has " + enemyHealth + " health remaining.\n");
     		} else if (enemyHealth <= 0) {
-    			isEnemyDead();
+    			Areas.setEnemyDead(Areas.getArea());
     		} else if (characterHealth <= 0) {
     			isCharacterDead();
     		}
@@ -405,18 +486,18 @@ public class Action extends FantasyRace {
     // determine percent chance of being able to run based on speed
     // if unsuccessful, initiate another round of attack()
     public static void run() {
-        if (!Action.getPlayerDead()) {    
-            if (!Areas.getEnemiesDead(Areas.getArea())) { 
+        if (!getPlayerDead()) {
+            if (!Areas.getEnemyDead(Areas.getArea())) { 
                 int runChance = (int) (Math.random()*100);
                 SemesterProject.storyOutputTF.appendText("\nRun Chance: " + runChance + "%\n");
                 if (characterSpeed < enemySpeed) {
                     if (runChance > 75 ) {
                         gotAway(true);
                         SemesterProject.storyOutputTF.appendText("\nGot away!\n");
-                        
+                    } else {
                         SemesterProject.storyOutputTF.appendText("\nCouldn't get away!\n");
                         attack();
-                    }            
+                    }
                 }
                 
                 if (characterSpeed > enemySpeed) {
@@ -436,16 +517,246 @@ public class Action extends FantasyRace {
                     } else {
                         SemesterProject.storyOutputTF.appendText("\nCouldn't get away!\n");
                         attack();
-                    }            
-                }            
-            }        
+                    }
+                }
+            }
         }
     }
     
     
+    private static void pickUpItem(int roomNum) {
+    	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {
+	    	// set stats for the item that the user picks up
+	    	String item = Areas.getItemName();
+	    	switch (item) {
+				case "Dagger":
+					hpChange=0;
+					atkChange=1;
+					spdChange=1;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked up a Dagger. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Longsword":
+					hpChange=0;
+					atkChange=3;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Longsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Buckler":
+					hpChange=3;
+					atkChange=0;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Buckler. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Plate Armor":
+					hpChange=5;
+					atkChange=0;
+					spdChange=-2;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Plate Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Leather Armor":
+					hpChange=2;
+					atkChange=0;
+					spdChange=2;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Leather Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Thief Idol":
+					hpChange=0;
+					atkChange=2;
+					spdChange=4;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Thief Idol. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Berserker Stone":
+					hpChange=-5;
+					atkChange=10;
+					spdChange=3;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Berserker Stone. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Great Axe":
+					hpChange=0;
+					atkChange=5;
+					spdChange=-2;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Great Axe. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Nibbles, the House Cat":
+					hpChange=1;
+					atkChange=1;
+					spdChange=1;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Nibbles, the House Cat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Priestly Vestments":
+					hpChange=10;
+					atkChange=-5;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Priestly Vestments. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Rapier":
+					hpChange=0;
+					atkChange=3;
+					spdChange=3;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Rapier. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Hammer":
+					hpChange=0;
+					atkChange=2;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Hammer. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Well-Crafted Boots":
+					hpChange=1;
+					atkChange=0;
+					spdChange=3;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Some Well-Crafted Boots. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Assassin Gloves":
+					hpChange=0;
+					atkChange=3;
+					spdChange=5;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Assassin Gloves. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Spiffy Hat":
+					hpChange=2;
+					atkChange=2;
+					spdChange=2;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Spiffy Hat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Sack Lunch":
+					hpChange=5;
+					atkChange=0;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up a Sack Lunch. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Embarrassing Photos":
+					hpChange=-3;
+					atkChange=-3;
+					spdChange=3;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Some Embarrassing Photos. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Some Self-Esteem":
+					hpChange=5;
+					atkChange=5;
+					spdChange=5;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Some Self-Esteem. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Miniature Mother-in-Law": 
+					hpChange=3;
+					atkChange=-3;
+					spdChange=-5;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Your Miniature Mother-in-Law. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Elven Nutcracker":
+					hpChange=0;
+					atkChange=1;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Elven Nutcracker. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Vorpal Sword":
+					hpChange=0;
+					atkChange=5;
+					spdChange=7;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Vorpal Sword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Yoga Pants":
+					hpChange=1;
+					atkChange=0;
+					spdChange=5;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Yoga Pants. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Book of Mormon":
+					hpChange=0;
+					atkChange=0;
+					spdChange=0;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Book of Mormon. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+				case "Gladius, Fair Broadsword":
+					hpChange=1;
+					atkChange=8;
+					spdChange=3;
+					Action.changeCharacterHealth(hpChange);
+					Action.changeCharacterAttack(atkChange);
+					Action.changeCharacterSpeed(spdChange);
+					System.out.println("Picked Up Gladius, Fair Broadsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+					break;
+			}
+	    	Areas.setGottenItem(roomNum);
+    	} else {
+    		System.out.println("There is no item here.");
+    	}
+    }
+
+    
     // allow player to retreat to the previous room they were in
     public static boolean gotAway(boolean run) {
          if (run = true) {
+        	 pickUpItem(Areas.getArea());
              Areas.setArea(Areas.getLastArea());             
          }
         return run;
@@ -460,14 +771,7 @@ public class Action extends FantasyRace {
             setPlayerDead(true);
     }
     
-    
-    public static void isEnemyDead() {
-            // get rid of enemy
-            // output that enemy is dead
-            
-    }
-    
-    
+     
     public static void youWin() {
         // set end game message
         SemesterProject.storyOutputTF.appendText("\nYou completed the dungeon!\n");
