@@ -7,7 +7,7 @@
  *  Version:     1.0
  *  Date:        4/5/2019
  *  Description: This class calculates the constitution, strength, and dexterity 
-                 scores for an Orc enemy.
+ *               scores for an Orc enemy.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
