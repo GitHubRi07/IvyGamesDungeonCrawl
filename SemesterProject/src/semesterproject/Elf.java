@@ -1,7 +1,15 @@
-// IvyTech Dungeon Game
-// Riley Tucker, Aiden Hutton
-// Karen Stackhouse, Christopher Fields
-// Created On 4/18/2019
+/**
+ *  Application: IvyGames_SoftwareProduct
+ *  Description: Take user through a 'choose your own adventure' style story.  
+ *  Title:       SoftwareProduct
+ *  Authors:       Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
+
+ *  Version:     1.0
+ *  Date:        4/5/2019
+ *  Description: 
+ *  Assignment:  SDEV265  System - Software Analysis and Projects
+ * 
+ */
 package semesterproject;
 
 
