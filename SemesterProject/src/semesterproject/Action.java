@@ -16,6 +16,7 @@ package semesterproject;
 public class Action extends FantasyRace {
     // global variables
     private static boolean playerDead;
+    private static boolean playerWon;
     private static int characterHealth;
     private static int characterAttack;
     private static int characterSpeed;
@@ -25,41 +26,32 @@ public class Action extends FantasyRace {
     private static int hpChange;
 	private static int atkChange;
 	private static int spdChange;
-    
+	
     
     // getters
     public static boolean getPlayerDead() {
         return playerDead;
     }
-    
+    public static boolean getPlayerWon() {
+        return playerWon;
+    }
     
     // setters
-    public static void changeCharacterHealth(int i) {
-        characterHealth += i;
-        String newHealthString = Integer.toString(characterHealth);
-        SemesterProject.constitutionTF.setText(newHealthString);
-    }
-    public static void changeCharacterAttack(int i) {
-        characterAttack += i;
-        String newAttackString = Integer.toString(characterAttack);
-        SemesterProject.strengthTF.setText(newAttackString);
-    }
-    public static void changeCharacterSpeed(int i) {
-        characterSpeed += i;
-        String newSpeedString = Integer.toString(characterSpeed);
-        SemesterProject.dexterityTF.setText(newSpeedString);
-    }
-    public static boolean setPlayerDead(boolean d) {
-        playerDead = d;
+    public static boolean setPlayerDead(boolean dead) {
+        playerDead = dead;
         return playerDead;
+    }
+    public static boolean setPlayerWon(boolean won) {
+        playerWon = won;
+        return playerWon;
     }
     
     
     // methods
     public static void goWest() {
     	System.out.println("goWest() -- Pressed button to go West");
-    	if (!Action.getPlayerDead()) {
-    		if (!Areas.getEnemyDead(Areas.getArea())) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
+    		if (!Areas.getHasEnemy(Areas.getArea())) {
                 switch (Areas.getArea()) {
 	                case 2:
 	                	pickUpItem(Areas.getArea());
@@ -155,15 +147,15 @@ public class Action extends FantasyRace {
 	                    // if no other case numbers activate
 	                    SemesterProject.storyOutputTF.appendText("\nYou can't go West.\n");
                 }
-            } else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
+            } else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
     	}
     }
     
     
     public static void goEast() {
     	System.out.println("goEast() -- Pressed button to go East");
-    	if (!Action.getPlayerDead()) {
-    		if (!Areas.getEnemyDead(Areas.getArea())) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
+    		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
 	    	        case 1:
 	                	pickUpItem(Areas.getArea());
@@ -259,15 +251,15 @@ public class Action extends FantasyRace {
 	    	                // if no other case numbers activate
 	    	                SemesterProject.storyOutputTF.appendText("\nYou can't go East.\n");
     	        }
-    		} else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
+    		} else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
     	}
     }
     
     
     public static void goNorth() {
     	System.out.println("goNorth() -- Pressed button to go North");
-    	if (!Action.getPlayerDead()) {
-    		if (!Areas.getEnemyDead(Areas.getArea())) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
+    		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
     	            case 0:
 	                	pickUpItem(Areas.getArea());
@@ -351,15 +343,15 @@ public class Action extends FantasyRace {
     	                // if no other case numbers activate
     	                SemesterProject.storyOutputTF.appendText("\nYou can't go North.\n");
     	        }
-    	    } else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here, Run or Attack!\n\n");}
+    	    } else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
     	}
     }
     
     
     public static void goSouth() {
     	System.out.println("goSouth() -- Pressed button to go South");
-    	if (!Action.getPlayerDead()) {
-    		if (!Areas.getEnemyDead(Areas.getArea())) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
+    		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
     	            case 2:
 	                	pickUpItem(Areas.getArea());
@@ -443,7 +435,7 @@ public class Action extends FantasyRace {
     	                // if no other case numbers activate
     	                SemesterProject.storyOutputTF.appendText("\nYou can't go South.\n");
     	        }
-    		} else {SemesterProject.storyOutputTF.appendText("\n\nThere is an enemy here! Run or Attack!\n\n");}
+    		} else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
     	}
     }
     
@@ -456,7 +448,7 @@ public class Action extends FantasyRace {
         enemyHealth = FantasyRace.getEnemyHealth();
         enemyAttack = FantasyRace.getEnemyAttackPower();
         enemySpeed = FantasyRace.getEnemySpeed();
-    	if (!getPlayerDead()) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
     		if ((enemyHealth > 0) && (characterHealth > 0)) {
     			int characterAttackDamage;
     			int enemyAttackDamage;
@@ -476,7 +468,8 @@ public class Action extends FantasyRace {
     			characterHealth -= enemyAttackDamage;
     			FantasyRace.setEnemyHealth(enemyHealth);
     			FantasyRace.setCharacterHealth(characterHealth);
-    			SemesterProject.storyOutputTF.appendText("\nDealt " + characterAttackDamage + " damage\n");
+    			SemesterProject.storyOutputTF.appendText("\nDealt " + characterAttackDamage + " damage.\n");
+                        SemesterProject.storyOutputTF.appendText("\nTook " + enemyAttackDamage + " damage.\n");
     			SemesterProject.storyOutputTF.appendText("\nFoe has " + enemyHealth + " health remaining.\n");
     		} else if (enemyHealth <= 0) {
     			Areas.setEnemyDead(Areas.getArea());
@@ -493,7 +486,7 @@ public class Action extends FantasyRace {
     // if unsuccessful, initiate another round of attack()
     public static void run() {
     	System.out.println("run() -- Pressed button to Run");
-        if (!getPlayerDead()) {
+        if ((!getPlayerDead()) && (!getPlayerWon())) {
             if (!Areas.getEnemyDead(Areas.getArea())) { 
                 int runChance = (int) (Math.random()*100);
                 SemesterProject.storyOutputTF.appendText("\nRun Chance: " + runChance + "%\n");
@@ -541,216 +534,192 @@ public class Action extends FantasyRace {
 					hpChange=0;
 					atkChange=1;
 					spdChange=1;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Dagger");
 					System.out.println("pickUpItem() -- Picked up a Dagger. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Longsword":
 					hpChange=0;
 					atkChange=3;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Longsword.");
 					System.out.println("pickUpItem() -- Picked Up a Longsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Buckler":
 					hpChange=3;
 					atkChange=0;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Buckler.");
 					System.out.println("pickUpItem() -- Picked Up a Buckler. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Plate Armor":
 					hpChange=5;
 					atkChange=0;
 					spdChange=-2;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Plate Armor.");
 					System.out.println("pickUpItem() -- Picked Up Plate Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Leather Armor":
 					hpChange=2;
 					atkChange=0;
 					spdChange=2;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Leather Armor.");
 					System.out.println("pickUpItem() -- Picked Up Leather Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Thief Idol":
 					hpChange=0;
 					atkChange=2;
 					spdChange=4;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Thief Idol.");
 					System.out.println("pickUpItem() -- Picked Up Thief Idol. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Berserker Stone":
 					hpChange=-5;
 					atkChange=10;
 					spdChange=3;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Berserker Stone.");
 					System.out.println("pickUpItem() -- Picked Up Berserker Stone. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Great Axe":
 					hpChange=0;
 					atkChange=5;
 					spdChange=-2;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Great Axe.");
 					System.out.println("pickUpItem() -- Picked Up a Great Axe. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Nibbles, the House Cat":
 					hpChange=1;
 					atkChange=1;
 					spdChange=1;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Nibbles, the House Cat.");
 					System.out.println("pickUpItem() -- Picked Up Nibbles, the House Cat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Priestly Vestments":
 					hpChange=10;
 					atkChange=-5;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Priestly Vestments.");
 					System.out.println("pickUpItem() -- Picked Up Priestly Vestments. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Rapier":
 					hpChange=0;
 					atkChange=3;
 					spdChange=3;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Rapier.");
 					System.out.println("pickUpItem() -- Picked Up a Rapier. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Hammer":
 					hpChange=0;
 					atkChange=2;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Hammer.");
 					System.out.println("pickUpItem() -- Picked Up a Hammer. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Well-Crafted Boots":
 					hpChange=1;
 					atkChange=0;
 					spdChange=3;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Some Well-Crafted Boots.");
 					System.out.println("pickUpItem() -- Picked Up Some Well-Crafted Boots. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Assassin Gloves":
 					hpChange=0;
 					atkChange=3;
 					spdChange=5;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Assassin Gloves.");
 					System.out.println("pickUpItem() -- Picked Up Assassin Gloves. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Spiffy Hat":
 					hpChange=2;
 					atkChange=2;
 					spdChange=2;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Spiffy Hat.");
 					System.out.println("pickUpItem() -- Picked Up a Spiffy Hat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Sack Lunch":
 					hpChange=5;
 					atkChange=0;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up a Sack Lunch.");
 					System.out.println("pickUpItem() -- Picked Up a Sack Lunch. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Embarrassing Photos":
 					hpChange=-3;
 					atkChange=-3;
 					spdChange=3;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
-					System.out.println("pickUpItem() -- Picked Up Some Embarrassing Photos. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Some Embarrassing Drawings.");
+					System.out.println("pickUpItem() -- Picked Up Some Embarrassing Drawings. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Some Self-Esteem":
 					hpChange=5;
 					atkChange=5;
 					spdChange=5;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Some Self-Esteem.");
 					System.out.println("pickUpItem() -- Picked Up Some Self-Esteem. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Miniature Mother-in-Law": 
 					hpChange=3;
 					atkChange=-3;
 					spdChange=-5;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Your Miniature Mother-in-Law.");
 					System.out.println("pickUpItem() -- Picked Up Your Miniature Mother-in-Law. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Elven Nutcracker":
 					hpChange=0;
 					atkChange=1;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Elven Nutcracker.");
 					System.out.println("pickUpItem() -- Picked Up Elven Nutcracker. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Vorpal Sword":
 					hpChange=0;
 					atkChange=5;
 					spdChange=7;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Vorpal Sword.");
 					System.out.println("pickUpItem() -- Picked Up Vorpal Sword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Yoga Pants":
 					hpChange=1;
 					atkChange=0;
 					spdChange=5;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Yoga Pants.");
 					System.out.println("pickUpItem() -- Picked Up Yoga Pants. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Book of Mormon":
 					hpChange=0;
 					atkChange=0;
 					spdChange=0;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Book of Mormon.");
 					System.out.println("pickUpItem() -- Picked Up Book of Mormon. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 				case "Gladius, Fair Broadsword":
 					hpChange=1;
 					atkChange=8;
 					spdChange=3;
-					changeCharacterHealth(hpChange);
-					changeCharacterAttack(atkChange);
-					changeCharacterSpeed(spdChange);
+                                        changeCharacterStats(hpChange, atkChange, spdChange);
+                                        SemesterProject.storyOutputTF.appendText("Picked up Gladius, Fair Broadsword.");
 					System.out.println("pickUpItem() -- Picked Up Gladius, Fair Broadsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
 			}
@@ -759,7 +728,26 @@ public class Action extends FantasyRace {
     		System.out.println("pickUpItem() -- There is no item here.");
     	}
     }
-
+    
+    
+    // change character's stats after getting an item
+    private static void changeCharacterStats(int hp, int att, int spd) {
+        // change character hp
+        characterHealth = FantasyRace.getCharacterHealth() + hp;
+        FantasyRace.setCharacterHealth(characterSpeed);
+        
+        // change character attack
+        characterAttack = FantasyRace.getCharacterAttackPower() + att;
+        FantasyRace.setCharacterAttackPower(characterSpeed);
+        
+        // change character speed
+        characterSpeed = FantasyRace.getCharacterSpeed() + spd;
+        FantasyRace.setCharacterSpeed(characterSpeed);
+        
+        // set changes in the player's stat text views
+        SemesterProject.setStatsTextField();
+    }
+    
     
     // allow player to retreat to the previous room they were in
     public static boolean gotAway(boolean run) {
@@ -785,6 +773,11 @@ public class Action extends FantasyRace {
     public static void youWin() {
     	System.out.println("youWin() -- Activated function to set you won.");
         // set end game message
-        SemesterProject.storyOutputTF.appendText("\nYou completed the dungeon!\n");
+    	setPlayerWon(true);
+        SemesterProject.storyOutputTF.appendText("\nCongradulations! You have completed the dungeon!"
+        		+ "\nWill you come back for more?\n\n");
+
+        SemesterProject.storyOutputTF.appendText("Written by:\nRiley Tucker\nAiden Hutton"
+        		+ "\nKaren Stackhouse\nChristopher Fields\n");
     }
 }
