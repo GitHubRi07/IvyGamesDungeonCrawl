@@ -6,7 +6,8 @@
 
  *  Version:     1.0
  *  Date:        4/5/2019
- *  Description: 
+ *  Description: This class calculates the constitution, strength, and dexterity 
+                 scores for a Boss enemy.
  *  Assignment:  SDEV265  System - Software Analysis and Projects
  * 
  */
@@ -16,6 +17,7 @@ package semesterproject;
 public class Boss extends FantasyRace {
 
     // variables
+	// between 6-25, 11-30, 6-25
     int constituton = (int) ((Math.random()*((20-1)+1))+1) + 5;
     int strength = (int) ((Math.random()*((20-1)+1))+1) + 10;
     int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 5;
