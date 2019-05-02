@@ -42,32 +42,25 @@ public class AreaDefinition {
     
     // setup the area definitions for each room in the game.
     public static void setupAreaDefinitions() {
-        System.out.println("setupAreaDefinition() -- Activate function to read area definitions from file");
         fileLineIndex = 0;
         firstFileLineIndex = 0;
         try {
             // set area description files
             areaFirstDescriptionFilePath = new File("src/semesterproject/firstAreaDescriptions.txt");
             areaDescriptionFilePath = new File("src/semesterproject/areaDescriptions.txt");
-            System.out.println(areaFirstDescriptionFilePath);
-            System.out.println(areaDescriptionFilePath);
             
             // create a scanner for the description files
             Scanner firstDescriptionscanner = new Scanner(areaFirstDescriptionFilePath);
             Scanner descriptionScanner = new Scanner(areaDescriptionFilePath);
-            System.out.println("\n\nFirst Time Area Descriptions.");
             while (firstDescriptionscanner.hasNext()) {
                 String message = firstDescriptionscanner.nextLine();
                 areaFirstMessage[firstFileLineIndex] = message;
                 firstFileLineIndex++;
-                System.out.println(firstFileLineIndex + " Line Read From First Description File.");
             }
-            System.out.println("\n\nArea Descriptions.");
             while (descriptionScanner.hasNext()) {
                 String message = descriptionScanner.nextLine();
                 areaMessage[fileLineIndex] = message;
                 fileLineIndex++;
-                System.out.println(fileLineIndex + " Line Read From Description File.");
             }
             
             // close files to complete file read
@@ -75,11 +68,8 @@ public class AreaDefinition {
             descriptionScanner.close();
         } catch (IOException ex) {
             if ((!areaFirstDescriptionFilePath.exists()) || (areaFirstDescriptionFilePath.isDirectory())) {
-                System.out.println("The file at: " + areaFirstDescriptionFilePath + " does exist or can not be found.");
             } else if (!areaDescriptionFilePath.exists() || (areaDescriptionFilePath.isDirectory())) {
-                System.out.println("The file at: " + areaDescriptionFilePath + " does exist or can not be found.");
             } else {
-                System.out.println("\nException: " + ex + "\n");
                 ex.printStackTrace();
             }
         }
@@ -99,16 +89,3 @@ public class AreaDefinition {
         SemesterProject.storyOutputTF.appendText("\n");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

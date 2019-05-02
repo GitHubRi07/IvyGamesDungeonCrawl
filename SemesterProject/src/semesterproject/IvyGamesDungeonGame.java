@@ -20,7 +20,7 @@ package semesterproject;
 public class IvyGamesDungeonGame { 
     
     // start IvyGames Dungeon Game!
-    public static void startGame() { 
+    public static void startGame() {
         // set starting area
     	AreaDefinition.setupAreaDefinitions();
         Item.setupItems();

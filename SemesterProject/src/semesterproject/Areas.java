@@ -23,14 +23,6 @@ public class Areas {
 	// global variables
     private static int currentArea;
     private static int lastArea;
-    /*
-    private static String[] itemNames = {"Dagger","Longsword","Buckler","Plate Armor","Leather Armor","Thief Idol",
-    		"Berserker Stone","Great Axe","Nibbles, the House Cat","Priestly Vestments","Rapier","Hammer",
-    		"Well-Crafted Boots","Assassin Gloves","Spiffy Hat","Sack Lunch","Embarrassing Drawings",
-    		"Some Self-Esteem","Miniature Mother-in-Law","Elven Nutcracker","Vorpal Sword","Yoga Pants",
-    		"Book of Mormon","Gladius, Fair Broadsword"};
-    private static String itemName = "";
-    */
     private static boolean[] beenTo = new boolean[26];
     private static boolean[] hasItem = new boolean[26];
     private static boolean[] gottenItem = new boolean[26];
@@ -47,9 +39,7 @@ public class Areas {
     
     // constructors
     Areas(int roomNum) {
-        System.out.println("Areas() -- activated function to create a new area.");
         int area = roomNum;
-        System.out.println("Areas() -- Room Area: " + area);
         // check if they have been to the room before
         // if not, determine if this room has an item and set enemies
         if (!beenTo[area]) {
@@ -67,7 +57,6 @@ public class Areas {
             Item.setItemName(itemNum);
             Item.setItemDescription(itemNum);
         }
-        System.out.println("Areas() -- Area " + roomNum + " Created.");
     }
     
 	
@@ -130,7 +119,6 @@ public class Areas {
     	// Display first time area message
     // If not the first time to the room, set room image and message
     public static void activateArea() {
-    	System.out.println("activateArea() -- Activated function to create an area, or display its image & message.");
     	switch (getArea()) {
     		case 0:
     			if (!beenTo[0]) {
@@ -145,7 +133,7 @@ public class Areas {
                                         + "\n- Good Luck!");
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);                                
+        			AreaDefinition.areaMessage(currentArea);
     			}
     			break;
     		case 1:
@@ -153,7 +141,7 @@ public class Areas {
     				roomsArray[1] = new Areas(1);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 2:              
@@ -161,7 +149,7 @@ public class Areas {
             		roomsArray[2] = new Areas(2);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 3:               
@@ -169,7 +157,7 @@ public class Areas {
             		roomsArray[3] = new Areas(3);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 4:
@@ -177,7 +165,7 @@ public class Areas {
             		roomsArray[4] = new Areas(4);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 5:
@@ -185,7 +173,7 @@ public class Areas {
             		roomsArray[5] = new Areas(5);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 6:                
@@ -193,7 +181,7 @@ public class Areas {
             		roomsArray[6] = new Areas(6);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 7:               
@@ -201,7 +189,7 @@ public class Areas {
             		roomsArray[7] = new Areas(7);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 8:               
@@ -209,7 +197,7 @@ public class Areas {
             		roomsArray[8] = new Areas(8);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 9:                
@@ -217,7 +205,7 @@ public class Areas {
             		roomsArray[9] = new Areas(9);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 10:               
@@ -225,7 +213,7 @@ public class Areas {
             		roomsArray[10] = new Areas(10);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 11:
@@ -233,7 +221,7 @@ public class Areas {
             		roomsArray[11] = new Areas(11);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 12:
@@ -241,7 +229,7 @@ public class Areas {
             		roomsArray[12] = new Areas(12);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 13:
@@ -249,7 +237,7 @@ public class Areas {
             		roomsArray[13] = new Areas(13);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 14:
@@ -257,7 +245,7 @@ public class Areas {
             		roomsArray[14] = new Areas(14);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 15:
@@ -265,7 +253,7 @@ public class Areas {
             		roomsArray[15] = new Areas(15);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 16:
@@ -273,7 +261,7 @@ public class Areas {
             		roomsArray[16] = new Areas(16);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 17:
@@ -281,7 +269,7 @@ public class Areas {
                 	roomsArray[17] = new Areas(17);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 18:
@@ -289,7 +277,7 @@ public class Areas {
                 	roomsArray[18] = new Areas(18);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 19:
@@ -297,15 +285,14 @@ public class Areas {
                 	roomsArray[19] = new Areas(19);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 20:
-                if (!beenTo[20]) {
-                	roomsArray[20] = new Areas(20);
-    			} else {
+                if (!beenTo[20]) {roomsArray[20] = new Areas(20);}
+                else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 21:
@@ -313,7 +300,7 @@ public class Areas {
                 	roomsArray[21] = new Areas(21);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 22:
@@ -321,7 +308,7 @@ public class Areas {
                 	roomsArray[22] = new Areas(22);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 23:
@@ -329,7 +316,7 @@ public class Areas {
                 	roomsArray[23] = new Areas(23);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 24:
@@ -337,7 +324,7 @@ public class Areas {
                 	roomsArray[24] = new Areas(24);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
             case 25:
@@ -345,44 +332,37 @@ public class Areas {
                 	roomsArray[25] = new Areas(25);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
                 break;
     	}
     }
     
       
-    private void determineIfHasItem(int roomNum) {    	
+    private void determineIfHasItem(int roomNum) {
         // there are no items in room0, the cave entrance
     	if ((roomNum != 0)) {
-            System.out.println("determineIfHasItem() -- Activated function to determine if a room has an item.");
             int percentChance = (int) Math.ceil(Math.random()*100);
-            System.out.println("determineIfHasItem() -- Percent chance to get an item: %" + percentChance);
             // rooms 20-25 have a 40% chance to find an item because they are dark
             if ((roomNum == 20) || (roomNum == 21) || (roomNum == 22) || 
                     (roomNum == 23) || (roomNum == 24) || (roomNum == 25)) {
                 if (percentChance > 40) {
         		setHasItem(roomNum);
-        		System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
         	}
                 // there are always items in rooms 1, 2, and 3
             } else if ((roomNum == 1) ||(roomNum == 2) || (roomNum == 3)) {
                 setHasItem(roomNum);
-                System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
         	
                 // all other rooms have an 80% chance to find an item.
             } else if (percentChance > 20) {
         		setHasItem(roomNum);
-        		System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
         	}
             
     	}
     }
     
     private void determineIfHasEnemy(int roomNum) {
-    	System.out.println("determineIfHasEnemy() -- Activated function to determine if a room has an enemy.");
         int percentChance = (int) Math.ceil(Math.random()*100);
-    	System.out.println("determineIfHasEnemy() -- Percent chance to find an enemy: %" + percentChance);
         // there are no enemies at the cave entrance or rooms 1, 2, and 3
     	if ((roomNum != 0) && (roomNum != 1) && (roomNum != 2) && (roomNum != 3)) {
             // rooms 20-25 have a 50% chance to find an enemy because they are dark
@@ -390,33 +370,26 @@ public class Areas {
                     (roomNum == 23) || (roomNum == 24) || (roomNum == 25)) {
                 if (percentChance > 50) {
         		setHasEnemy(roomNum, true);
-        		System.out.println("determineIfHasEnemy() -- there is an enemy in room: " + roomNum);
         	}
             // room 11 is the boss room
             } else if (roomNum == 11) {
     		setHasEnemy(roomNum, true);
-    		System.out.print("determineIfHasEnemy() -- Boss enemy room");
             } else {
                 // in all other rooms there is a 75% chance that there will be an enemy
         	if (percentChance > 25) {
                     setHasEnemy(roomNum, true);
-                    System.out.println("determineIfHasEnemy() -- there is an enemy in room: " + roomNum);
         	}
             }
     	}
     }
     
     public static void generateEnemies(int roomNum) {
-    	System.out.println("generateEnemies() -- Activated function to generate enemies.");
     	if (hasEnemy[roomNum] == true) {
-    		System.out.println("generateEnemies() -- There is an enemy in room: " + roomNum);
     		if (roomNum == 11) {
-    	    	System.out.println("generateEnemies() -- room number equal to 11: " + (roomNum == 11));
         		// set boss room enemy
         		boss = new Boss();
         		boss.setBossStats();
     			SemesterProject.storyOutputTF.appendText("\n-- This is the Bandit Leader! --");
-        		System.out.println("generateEnemies() -- Enemies Here: " + boss);
     		} else {
     			// code to set the enemies for the specific room
         		int randomInt = randomGenerator.nextInt(3) + 1;
@@ -425,19 +398,16 @@ public class Areas {
         			goblin = new Goblin();
         			goblin.setGoblinStats();
         			SemesterProject.storyOutputTF.appendText("\n-- There is a Goblin! --");
-            		System.out.println("generateEnemies() -- Enemies Here: " + goblin);
         			break;
         		case 2:
         			orc = new Orc();
         			orc.setOrcStats();
         			SemesterProject.storyOutputTF.appendText("\n-- There is an Orc! --");
-            		System.out.println("generateEnemies() -- Enemies Here: " + orc);
         			break;
         		case 3:
         			ogre = new Ogre();
         			ogre.setOgreStats();
         			SemesterProject.storyOutputTF.appendText("\n-- There is an Ogre! --");
-            		System.out.println("generateEnemies() -- Enemies Here: " + ogre);
         			break;
         		}
     		}

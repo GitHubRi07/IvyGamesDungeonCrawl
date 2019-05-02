@@ -39,11 +39,8 @@ import javafx.scene.text.Font;
 
 public class SemesterProject extends Application {
 	
-	// declare application properties
+	// application properties
     private static final String TITLE = "IvyGames' Dungeon Crawl!";
-    final String AREA_DEFINITION_FILE = "areaDescriptions.txt";
-    private final String FONT_NAME = "Consolas";
-    private final int FONT_SIZE = 10;
 	
     // buttons
     private static Button goWestBT = new Button("Go West");
@@ -158,7 +155,7 @@ public class SemesterProject extends Application {
         mapIV.setCache(true);
         // story output text view settings
         storyOutputTF.setWrapText(true);
-		storyOutputTF.setFont(Font.font(FONT_NAME, FONT_SIZE));
+		storyOutputTF.setFont(Font.font("Consolas", 10));
         
         // create a scene and put it on stage
         Scene scene = new Scene(outerBorderPane);
@@ -181,7 +178,7 @@ public class SemesterProject extends Application {
     
     public static void runGame() {
         // welcome player
-        storyOutputTF.appendText("\nWelcome to " + TITLE + "!\n");
+        storyOutputTF.appendText("\nWelcome to " + TITLE + "\n");
         storyOutputTF.appendText("An IvyGames Adventure.\n");
         storyOutputTF.appendText("Prepare to delve deep into a wicked cave full of perils and rewards.\n\n");
         // allow player to select their fantasy race
@@ -227,7 +224,7 @@ public class SemesterProject extends Application {
                     dwarf.setDwarfStats();
                     setStatsTextField();
                     raceSelected = true;
-                }                
+                }
             }
         });
     }
@@ -257,9 +254,10 @@ public class SemesterProject extends Application {
                         activateMovementFunctions();
                     }
                 }
-            }            
+            }
         });
     }
+    
     
     private static void activateMovementFunctions() {
     	// add button functions after game starts
@@ -291,6 +289,7 @@ public class SemesterProject extends Application {
         	}
         });
    }
+    
     
     public static void main(String[] args) {
         // launch GUI     

@@ -66,8 +66,7 @@ public class Item {
     
     // methods
     // set up the item name list and item description list
-    public static void setupItems() {        
-        System.out.println("setupItems() -- Activate function to read items and definitions from file");
+    public static void setupItems() {
         itemNamesList = new String[24];
         itemDescriptionsList = new String[24];
         itemNameIndex = 0;
@@ -75,39 +74,31 @@ public class Item {
         try {
             // set items description file
             itemFilePath = new File("src/semesterproject/itemList.txt");
-            System.out.println("Item file path: " + itemFilePath);
             
             // create a scanner for the item description file
             Scanner itemNameScanner = new Scanner(itemFilePath);
             
-            System.out.println("\nItem Names:");
             // Item names
             for (int i = 0; i < 1; i++) {
                 String readLine;
                 for (itemNameIndex = 0; itemNameIndex <= 23; itemNameIndex++) {
                     readLine = itemNameScanner.nextLine();
                     itemNamesList[itemNameIndex] = readLine;
-                    System.out.println("Line " + itemNameIndex + " Read From First Item Name File. = " + readLine);
                 }
-                System.out.print("\n----------------------------\n");
                 for (itemDescriptionIndex = 0; itemDescriptionIndex <= 23; itemDescriptionIndex++) {
                     readLine = itemNameScanner.nextLine();
                     itemDescriptionsList[itemDescriptionIndex] = readLine;
-                    System.out.println("Line " + itemDescriptionIndex + " Read From Item Description File. = " + readLine);
                 }                
-            }            
+            }
             
             // close files to complete file read
             itemNameScanner.close();
         } catch (IOException ex) {
             if ((!itemFilePath.exists()) || (itemFilePath.isDirectory())) {
-                System.out.println("The file at: " + itemFilePath + " does exist or can not be found.");
             } else {
-                System.out.println("\nException: " + ex + "\n");
                 ex.printStackTrace();
             }
         }
-        System.out.println("----------------------------------------------------------------");
     }
     
     // set the stats for an item that the user picks up
@@ -260,12 +251,5 @@ public class Item {
 	}
         // print the stat changes to the player output
         SemesterProject.storyOutputTF.appendText("");
-        System.out.println("pickUpItem() -- Stats Added: " + healthChange + " HP, " + attackChange + " ATK, " + speedChange + " SPD");
     }
-    
-    
-    
-    
-    
-    
 }

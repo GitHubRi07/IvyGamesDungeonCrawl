@@ -51,7 +51,6 @@ public class Action extends FantasyRace {
     
     // methods
     public static void goWest() {
-    	System.out.println("goWest() -- Pressed button to go West");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
     		if (!Areas.getHasEnemy(Areas.getArea())) {
                 switch (Areas.getArea()) {
@@ -155,7 +154,6 @@ public class Action extends FantasyRace {
     
     
     public static void goEast() {
-    	System.out.println("goEast() -- Pressed button to go East");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
     		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
@@ -259,7 +257,6 @@ public class Action extends FantasyRace {
     
     
     public static void goNorth() {
-    	System.out.println("goNorth() -- Pressed button to go North");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
     		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
@@ -351,7 +348,6 @@ public class Action extends FantasyRace {
     
     
     public static void goSouth() {
-    	System.out.println("goSouth() -- Pressed button to go South");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
     		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
@@ -440,7 +436,6 @@ public class Action extends FantasyRace {
     
     
     public static void attack() {
-    	System.out.println("attack() -- Pressed button to Attack");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
             if (Areas.getHasEnemy(Areas.getArea())) {
         	characterHealth = FantasyRace.getCharacterHealth();
@@ -504,7 +499,6 @@ public class Action extends FantasyRace {
     // determine percent chance of being able to run based on speed
     // if unsuccessful, initiate another round of attack()
     public static void run() {
-    	System.out.println("run() -- Pressed button to Run");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
     		if (Areas.getHasEnemy(Areas.getArea())) {
                 if (!Areas.getEnemyDead(Areas.getArea())) { 
@@ -547,7 +541,6 @@ public class Action extends FantasyRace {
     
     
     private static void pickUpItem(int roomNum) {
-    	System.out.println("pickUpItem() -- Activated function to pick up item.");
     	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {    		
 	    	// set stats for the item that the user picks up                
 	    	String item = Item.getItemName();
@@ -563,7 +556,6 @@ public class Action extends FantasyRace {
                 SemesterProject.storyOutputTF.appendText("\n- Stats Changed: " + atkChange + " Attack, " + spdChange + " Speed, " + hpChange + " Health\n");
 	    	Areas.setGottenItem(roomNum);
     	} else {
-    		System.out.println("pickUpItem() -- There is no item here.");
     	}
     }
     
@@ -590,7 +582,6 @@ public class Action extends FantasyRace {
     // allow player to retreat to the previous room they were in
     // get rid of the enemy that they ran away from, unless it was the boss
     public static void gotAway() {
-    	System.out.println("gotAway() -- Activated function to set got away.");
     	SemesterProject.storyOutputTF.appendText("You are filled with determination: +5 HP\n");
     	characterHealth += 5;
     	FantasyRace.setCharacterHealth(characterHealth);
@@ -605,7 +596,6 @@ public class Action extends FantasyRace {
     
     
     public static void characterDied() {
-    	System.out.println("characterDied() -- Activated function to set character dead.");
     	// output that character is dead
     	// end the game or restart
     	setPlayerDead(true);
@@ -615,7 +605,6 @@ public class Action extends FantasyRace {
     
      
     public static void youWin() {
-    	System.out.println("youWin() -- Activated function to set you won.");
         // set end game message
     	setPlayerWon(true);
         SemesterProject.storyOutputTF.appendText("\nCongradulations!"
