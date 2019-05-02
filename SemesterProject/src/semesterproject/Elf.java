@@ -17,10 +17,10 @@ package semesterproject;
 public class Elf extends FantasyRace {
     
     // variables
-	// between 3-22, 4-23, 5-24
-    int constituton = (int) ((Math.random()*((20-1)+1))+1) + 2;
-    int strength = (int) ((Math.random()*((20-1)+1))+1) + 3;
-    int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 4;
+	// between 6-16, 11-21, 16-26
+    int constituton = (int) (Math.random() * ((16 - 6) + 1)) + 6;
+    int strength = (int) (Math.random() * ((21 - 11) + 1)) + 11;
+    int dexterity = (int) (Math.random() * ((26 - 16) + 1)) + 16;
     
     // create a elf
     Elf() {
