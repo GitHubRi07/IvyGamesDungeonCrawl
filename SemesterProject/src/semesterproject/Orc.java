@@ -17,10 +17,10 @@ package semesterproject;
 public class Orc extends FantasyRace {
     
     // variables
-	// between 4-23, 5-24, 3-22
-    int constituton = (int) ((Math.random()*((20-1)+1))+1) + 3;
-    int strength = (int) ((Math.random()*((20-1)+1))+1) + 4;
-    int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 2;
+	// between 11-21, 16-26, 6-16
+    int constituton = (int) (Math.random() * ((21 - 11) + 1)) + 11;
+    int strength = (int) (Math.random() * ((26 - 16) + 1)) + 16;
+    int dexterity = (int) (Math.random() * ((16 - 6) + 1)) + 6;
     
     // create a orc
     Orc() {
