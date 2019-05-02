@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
- *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:       SoftwareProduct
+ *  Description: Take user through a dungeon-crawl-style adventure.  
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors:     Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
@@ -40,7 +40,7 @@ import javafx.scene.text.Font;
 public class SemesterProject extends Application {
 	
 	// declare application properties
-    private static final String TITLE = "IvyGames' SoftwareProduct:  Dungeon!";
+    private static final String TITLE = "IvyGames' Dungeon Crawl!";
     final String AREA_DEFINITION_FILE = "areaDescriptions.txt";
     private final String FONT_NAME = "Consolas";
     private final int FONT_SIZE = 10;
@@ -181,7 +181,7 @@ public class SemesterProject extends Application {
     
     public static void runGame() {
         // welcome player
-        storyOutputTF.appendText("Welcome to " + TITLE + "!\n");
+        storyOutputTF.appendText("\nWelcome to " + TITLE + "!\n");
         storyOutputTF.appendText("An IvyGames Adventure.\n");
         storyOutputTF.appendText("Prepare to delve deep into a wicked cave full of perils and rewards.\n\n");
         // allow player to select their fantasy race
@@ -194,35 +194,35 @@ public class SemesterProject extends Application {
     // select race and set stats
     public static void selectRace() {
     	// tell player how to choose race
-        storyOutputTF.appendText("\n--- Choose a race. ---"
-        		+ "\nYou can be a human, an elf, or a dwarf."
-        		+ "\nEach race has different Attack Power, Constitution, and Speed."
-        		+ "\nHumans have a fairly average range of abilities."
-        		+ "\nElves are known to be quicker than others, but not as powerful."
-        		+ "\nDwarves are considered hardy, but  they are stout and slow.\n");
-        storyOutputTF.appendText("\nChoose wisely, as you can only make this decision once.\n");
-        storyOutputTF.appendText("\nEnter the key 'h', 'e', or 'd' to choose Human, Elf, or Dwarf respectively.\n");
-        storyOutputTF.appendText("\nPress the 'Enter' key to start the game once you have selected your race.\n");
+        storyOutputTF.appendText("\n--- Choose a Race ---"
+        		+ "\n- You can be a human, an elf, or a dwarf."
+        		+ "\n- Each race has different Attack Power, Constitution, and Speed."
+        		+ "\n- Humans have a fairly average range of abilities."
+        		+ "\n- Elves are known to be quicker than others, but not as powerful."
+        		+ "\n- Dwarves are considered hardy, but  they are stout and slow.\n");
+        storyOutputTF.appendText("\n- Choose wisely, as you can only make this decision once.\n");
+        storyOutputTF.appendText("\n- Enter the key 'h', 'e', or 'd' to choose Human, Elf, or Dwarf respectively.\n");
+        storyOutputTF.appendText("\n- Press the 'Enter' key to start the game once you have selected your race.\n");
         // take player input to select race
         storyOutputTF.setOnKeyTyped((KeyEvent selectRaceEvent) -> {
             String input = selectRaceEvent.getCharacter();
             if (!raceSelected) {
                 if (("h".equals(input)) || ("H".equals(input))) {
-                    storyOutputTF.appendText("\nYou chose Human. - ");
+                    storyOutputTF.appendText("\n- You chose Human: ");
                     Human human = new Human();
                     human.setHumanStats();
                     setStatsTextField();
                     raceSelected = true;
                 }
                 if (("e".equals(input)) || ("E".equals(input))) {
-                    storyOutputTF.appendText("\nYou chose Elf. - ");
+                    storyOutputTF.appendText("\n- You chose Elf: ");
                     Elf elf = new Elf();
                     elf.setElfStats();
                     setStatsTextField();
                     raceSelected = true;
                 }
                 if (("d".equals(input)) || ("D".equals(input))) {
-                    storyOutputTF.appendText("\nYou chose Dwarf. - ");
+                    storyOutputTF.appendText("\n- You chose Dwarf: ");
                     Dwarf dwarf = new Dwarf();
                     dwarf.setDwarfStats();
                     setStatsTextField();
@@ -269,7 +269,7 @@ public class SemesterProject extends Application {
         goWestBT.setOnAction(e -> Action.goWest());
         attackBT.setOnAction(e -> Action.attack());
         runBT.setOnAction(e -> Action.run());
-        // add button functions to respond to arrow keys
+        // add button functions to respond to arrow keys or WASD
         storyOutputTF.setOnKeyPressed((KeyEvent event) -> {
         	KeyCode key = event.getCode();
         	if (key.equals(KeyCode.UP)) {
@@ -279,6 +279,14 @@ public class SemesterProject extends Application {
         	} else if (key.equals(KeyCode.DOWN)) {
         		Action.goSouth();
         	} else if (key.equals(KeyCode.LEFT)) {
+        		Action.goWest();
+        	} else if (key.equals(KeyCode.W)) {
+        		Action.goNorth();
+        	} else if (key.equals(KeyCode.D)) {
+        		Action.goEast();
+        	} else if (key.equals(KeyCode.S)) {
+        		Action.goSouth();
+        	} else if (key.equals(KeyCode.A)) {
         		Action.goWest();
         	}
         });

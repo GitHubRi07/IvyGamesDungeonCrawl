@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
- *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:       SoftwareProduct
+ *  Description: Take user through a dungeon-crawl-style adventure.
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors:     Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
@@ -49,8 +49,8 @@ public class AreaDefinition {
             // set area description files
             areaFirstDescriptionFilePath = new File("src/semesterproject/firstAreaDescriptions.txt");
             areaDescriptionFilePath = new File("src/semesterproject/areaDescriptions.txt");
-        	System.out.println(areaFirstDescriptionFilePath);
-        	System.out.println(areaDescriptionFilePath);
+            System.out.println(areaFirstDescriptionFilePath);
+            System.out.println(areaDescriptionFilePath);
             
             // create a scanner for the description files
             Scanner firstDescriptionscanner = new Scanner(areaFirstDescriptionFilePath);
@@ -60,14 +60,14 @@ public class AreaDefinition {
                 String message = firstDescriptionscanner.nextLine();
                 areaFirstMessage[firstFileLineIndex] = message;
                 firstFileLineIndex++;
-                System.out.println(firstFileLineIndex + "Line Read From First Description File.");
+                System.out.println(firstFileLineIndex + " Line Read From First Description File.");
             }
             System.out.println("\n\nArea Descriptions.");
             while (descriptionScanner.hasNext()) {
                 String message = descriptionScanner.nextLine();
                 areaMessage[fileLineIndex] = message;
                 fileLineIndex++;
-                System.out.println(fileLineIndex + "Line Read From Description File.");
+                System.out.println(fileLineIndex + " Line Read From Description File.");
             }
             
             // close files to complete file read
@@ -88,13 +88,13 @@ public class AreaDefinition {
     
     // set and display area message
     public static void areaMessage(int roomNum) {
-        SemesterProject.storyOutputTF.appendText("\n-- ");
+        SemesterProject.storyOutputTF.appendText("\n");
         if (!Areas.getBeenTo(roomNum)) {
             // first time message
-            SemesterProject.storyOutputTF.appendText(getFirstMessage(roomNum));
+            SemesterProject.storyOutputTF.appendText("- " + getFirstMessage(roomNum));
         } else {
             // regular message
-            SemesterProject.storyOutputTF.appendText(getAreaMessage(roomNum));
+            SemesterProject.storyOutputTF.appendText("- " + getAreaMessage(roomNum));
         }
         SemesterProject.storyOutputTF.appendText("\n");
     }

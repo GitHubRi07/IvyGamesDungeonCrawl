@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
- *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:       SoftwareProduct
+ *  Description: Take user through a dungeon-crawl-style adventure.
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors:     Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
@@ -23,12 +23,14 @@ public class Areas {
 	// global variables
     private static int currentArea;
     private static int lastArea;
+    /*
     private static String[] itemNames = {"Dagger","Longsword","Buckler","Plate Armor","Leather Armor","Thief Idol",
     		"Berserker Stone","Great Axe","Nibbles, the House Cat","Priestly Vestments","Rapier","Hammer",
     		"Well-Crafted Boots","Assassin Gloves","Spiffy Hat","Sack Lunch","Embarrassing Drawings",
     		"Some Self-Esteem","Miniature Mother-in-Law","Elven Nutcracker","Vorpal Sword","Yoga Pants",
     		"Book of Mormon","Gladius, Fair Broadsword"};
     private static String itemName = "";
+    */
     private static boolean[] beenTo = new boolean[26];
     private static boolean[] hasItem = new boolean[26];
     private static boolean[] gottenItem = new boolean[26];
@@ -62,7 +64,8 @@ public class Areas {
         if ((hasItem[area]) && (!gottenItem[area])) {
             // get item name from array of item names
             int itemNum = randomGenerator.nextInt(24);
-            setItemName(itemNum);
+            Item.setItemName(itemNum);
+            Item.setItemDescription(itemNum);
         }
         System.out.println("Areas() -- Area " + roomNum + " Created.");
     }
@@ -77,9 +80,6 @@ public class Areas {
     }
     public static boolean getBeenTo(int roomNum) {
         return beenTo[roomNum];
-    }
-    public static String getItemName() {
-    	return itemName;
     }
     public static boolean getHasEnemy(int roomNum) {
     	return hasEnemy[roomNum];
@@ -110,9 +110,6 @@ public class Areas {
     public static void setGottenItem(int roomNum) {
     	gottenItem[roomNum] = true;
     }
-    private static void setItemName(int itemNum) {
-    	itemName = itemNames[itemNum];
-    }
     private static void setRoomImage(int roomNum) {
     	roomImagePath = new File(("semesterProject/mapRooms/room") + (Integer.toString(roomNum)) + (".jpg"));
     	String roomImagePathString = roomImagePath.toString();
@@ -138,9 +135,17 @@ public class Areas {
     		case 0:
     			if (!beenTo[0]) {
         			roomsArray[0] = new Areas(0);
+                                // user is only in room0 at the start of the game
+                                // explian how to move
+                                SemesterProject.storyOutputTF.appendText("\n-- Movement --"
+                                        + "\n- You can attempt to move North, South, East, or West."
+                                        + "\n- Do this using the designated buttons."
+                                        + "\n- You can also move using the arrow keys "
+                                        + "or the keys w-a-s-d."
+                                        + "\n- Good Luck!");
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);
+        			AreaDefinition.areaMessage(currentArea);                                
     			}
     			break;
     		case 1:
@@ -347,12 +352,12 @@ public class Areas {
     }
     
       
-    private void determineIfHasItem(int roomNum) {
-    	System.out.println("determineIfHasItem() -- Activated function to determine if a room has an item.");
-        int percentChance = (int) Math.ceil(Math.random()*100);
-    	System.out.println("determineIfHasItem() -- Percent chance to get an item: %" + percentChance);
+    private void determineIfHasItem(int roomNum) {    	
         // there are no items in room0, the cave entrance
     	if ((roomNum != 0)) {
+            System.out.println("determineIfHasItem() -- Activated function to determine if a room has an item.");
+            int percentChance = (int) Math.ceil(Math.random()*100);
+            System.out.println("determineIfHasItem() -- Percent chance to get an item: %" + percentChance);
             // rooms 20-25 have a 40% chance to find an item because they are dark
             if ((roomNum == 20) || (roomNum == 21) || (roomNum == 22) || 
                     (roomNum == 23) || (roomNum == 24) || (roomNum == 25)) {

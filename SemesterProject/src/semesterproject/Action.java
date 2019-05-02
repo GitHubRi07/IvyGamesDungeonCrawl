@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
- *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:       SoftwareProduct
+ *  Description: Take user through a dungeon-crawl-style adventure.  
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors: 	 Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
@@ -22,11 +22,12 @@ public class Action extends FantasyRace {
     private static int characterAttack;
     private static int characterSpeed;
     private static int enemyHealth;
+    private static int enemyMaxHealth;
     private static int enemyAttack;
     private static int enemySpeed;
     private static int hpChange;
-	private static int atkChange;
-	private static int spdChange;
+    private static int atkChange;
+    private static int spdChange;
 	
     
     // getters
@@ -146,9 +147,9 @@ public class Action extends FantasyRace {
 	                    break;
 	                default:
 	                    // if no other case numbers activate
-	                    SemesterProject.storyOutputTF.appendText("\nYou can't go West.\n");
+	                    SemesterProject.storyOutputTF.appendText("\n- You can't go West.\n");
                 }
-            } else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
+            } else {SemesterProject.storyOutputTF.appendText("\n- There is an enemy here, Run or Attack!\n");}
     	}
     }
     
@@ -250,9 +251,9 @@ public class Action extends FantasyRace {
 	    	            break;
 	    	            default:
 	    	                // if no other case numbers activate
-	    	                SemesterProject.storyOutputTF.appendText("\nYou can't go East.\n");
+	    	                SemesterProject.storyOutputTF.appendText("\n- You can't go East.\n");
     	        }
-    		} else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
+    		} else {SemesterProject.storyOutputTF.appendText("\n- There is an enemy here, Run or Attack!\n");}
     	}
     }
     
@@ -342,9 +343,9 @@ public class Action extends FantasyRace {
     	                break;
     	            default:
     	                // if no other case numbers activate
-    	                SemesterProject.storyOutputTF.appendText("\nYou can't go North.\n");
+    	                SemesterProject.storyOutputTF.appendText("\n- You can't go North.\n");
     	        }
-    	    } else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
+    	    } else {SemesterProject.storyOutputTF.appendText("\n- There is an enemy here, Run or Attack!\n");}
     	}
     }
     
@@ -355,7 +356,7 @@ public class Action extends FantasyRace {
     		if (!Areas.getHasEnemy(Areas.getArea())) {
     	        switch (Areas.getArea()) {
     	            case 2:
-	                	SemesterProject.storyOutputTF.appendText("\nYou feel like you shouldn't leave yet!");
+	                	SemesterProject.storyOutputTF.appendText("\n- You feel like you shouldn't leave yet!");
     	                break;
     	            case 5:
 	                	pickUpItem(Areas.getArea());
@@ -431,9 +432,9 @@ public class Action extends FantasyRace {
     	                break;
     	            default:
     	                // if no other case numbers activate
-    	                SemesterProject.storyOutputTF.appendText("\nYou can't go South.\n");
+    	                SemesterProject.storyOutputTF.appendText("\n- You can't go South.\n");
     	        }
-    		} else {SemesterProject.storyOutputTF.appendText("\nThere is an enemy here, Run or Attack!\n");}
+    		} else {SemesterProject.storyOutputTF.appendText("\n- There is an enemy here, Run or Attack!\n");}
     	}
     }
     
@@ -441,55 +442,61 @@ public class Action extends FantasyRace {
     public static void attack() {
     	System.out.println("attack() -- Pressed button to Attack");
     	if ((!getPlayerDead()) && (!getPlayerWon())) {
-        	if (Areas.getHasEnemy(Areas.getArea())) {
-        		characterHealth = FantasyRace.getCharacterHealth();
+            if (Areas.getHasEnemy(Areas.getArea())) {
+        	characterHealth = FantasyRace.getCharacterHealth();
                 characterAttack = FantasyRace.getCharacterAttackPower();
                 characterSpeed = FantasyRace.getCharacterSpeed();
                 enemyHealth = FantasyRace.getEnemyHealth();
+                enemyMaxHealth = FantasyRace.getEnemyMaxHealth();
                 enemyAttack = FantasyRace.getEnemyAttackPower();
                 enemySpeed = FantasyRace.getEnemySpeed();
-        		if ((enemyHealth > 0) && (characterHealth > 0)) {
-        			int characterAttackDamage;
-        			int enemyAttackDamage;
-        			// character or enemy gets two attacks (attack damage x2) if speed is more than, or equal to, 
-        			// double the opponent's speed. Otherwise, they each only get x1 attack speed.            
-        			if ((characterSpeed*2) <= enemySpeed) {
-                                    SemesterProject.storyOutputTF.appendText("\nYou are much faster than your opponent. You attacked twice!");
-                                    characterAttackDamage = characterAttack;
-                                    enemyAttackDamage = enemyAttack * 2;
-        			} else if (characterSpeed >= (enemySpeed*2)){
-                                    SemesterProject.storyOutputTF.appendText("\nYour enemy is much faster than you. They attacked twice!");
-                                    characterAttackDamage = characterAttack * 2;
-                                    enemyAttackDamage = enemyAttack;
-        			} else {
-                                    characterAttackDamage = characterAttack;
-                                    enemyAttackDamage = enemyAttack;
-        			}
-        			enemyHealth -= characterAttackDamage;
-        			characterHealth -= enemyAttackDamage;
-        			FantasyRace.setEnemyHealth(enemyHealth);
-        			FantasyRace.setCharacterHealth(characterHealth);
-        			SemesterProject.setStatsTextField();
-        			SemesterProject.storyOutputTF.appendText("\nDealt " + characterAttackDamage + " damage.");
-        			SemesterProject.storyOutputTF.appendText("\nTook " + enemyAttackDamage + " damage.");
-        			SemesterProject.storyOutputTF.appendText("\nFoe has " + enemyHealth + " health remaining.\n");
-        		}
-        		if (enemyHealth <= 0) {
-        			if (Areas.getArea() == 11) {
-            			SemesterProject.storyOutputTF.appendText("\n-- You defeated the Bandit Leader! --\n");
-            			youWin();
-        			} else {
-            			SemesterProject.storyOutputTF.appendText("\n-- You killed the enemy! --\n");
-        			}
-        			Areas.setEnemyDead(Areas.getArea());
-        		}
-        		if (characterHealth <= 0) {
-        			characterDied();
-        		}
-        	} else {
-        		SemesterProject.storyOutputTF.appendText("\nThere is nothing to attack.\n");
-        	} 
-    	}   	
+                if ((enemyHealth > 0) && (characterHealth > 0)) {
+                    int characterAttackDamage;
+                    int enemyAttackDamage;
+                    // character or enemy gets two attacks (attack damage x2) if speed is more than, or equal to, 
+                    // double the opponent's speed. Otherwise, they each only get x1 attack speed.
+                    // if enemy has less than %10 health left, you attack first, so they do not get a final attack
+                    if (enemyHealth <= (enemyMaxHealth*.10)) {
+                        SemesterProject.storyOutputTF.appendText("\n- It is almost dead, you swiftly strike the final blow!\n");
+                        characterAttackDamage = characterAttack;
+                        enemyAttackDamage = 0;
+                    } else if ((characterSpeed*2) <= enemySpeed) {
+                        SemesterProject.storyOutputTF.appendText("\nYour enemy is much faster than you. They attacked twice!");
+                        characterAttackDamage = characterAttack;
+                        enemyAttackDamage = enemyAttack * 2;
+                    } else if (characterSpeed >= (enemySpeed*2)){
+                        SemesterProject.storyOutputTF.appendText("\nYou are much faster than your opponent. You attacked twice!");
+                        characterAttackDamage = characterAttack * 2;
+                        enemyAttackDamage = enemyAttack;
+                    } else {
+                        characterAttackDamage = characterAttack;
+                        enemyAttackDamage = enemyAttack;
+                    }
+                    enemyHealth -= characterAttackDamage;
+                    characterHealth -= enemyAttackDamage;
+                    FantasyRace.setEnemyHealth(enemyHealth);
+                    FantasyRace.setCharacterHealth(characterHealth);
+                    SemesterProject.setStatsTextField();
+                    SemesterProject.storyOutputTF.appendText("\nYou dealt " + characterAttackDamage + " damage.");
+                    SemesterProject.storyOutputTF.appendText("\nYou recieved " + enemyAttackDamage + " damage.");
+                    SemesterProject.storyOutputTF.appendText("\nFoe has " + enemyHealth + " health remaining.\n");
+                }
+                if (characterHealth <= 0) {
+                    characterDied();
+        	}
+                if (enemyHealth <= 0) {
+                    if (Areas.getArea() == 11) {
+                        SemesterProject.storyOutputTF.appendText("\n-- You defeated the Bandit Leader! --\n");
+            		youWin();
+                    } else {
+            		SemesterProject.storyOutputTF.appendText("-- You killed the enemy! --\n");
+                    }
+        		Areas.setEnemyDead(Areas.getArea());
+        	}        	
+            } else {
+                SemesterProject.storyOutputTF.appendText("\n- There is nothing to attack.\n");
+            } 
+        }   	
     }
     
     
@@ -502,35 +509,38 @@ public class Action extends FantasyRace {
     		if (Areas.getHasEnemy(Areas.getArea())) {
                 if (!Areas.getEnemyDead(Areas.getArea())) { 
                     int runChance = (int) (Math.random()*100);
-                    SemesterProject.storyOutputTF.appendText("\nYou have a : %" + runChance + " chance to get away.\n");
+                    SemesterProject.storyOutputTF.appendText("\n- You have a %" + runChance + " chance to get away.");
+                    // enemy is faster than player - %30 chance to get away
                     if (characterSpeed < enemySpeed) {
-                        if (runChance > 75 ) {
-                            SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
+                        if (runChance >= 70 ) {
+                            SemesterProject.storyOutputTF.appendText("\n- You got away!");
                             gotAway();
                         } else {
-                            SemesterProject.storyOutputTF.appendText("\nYou couldn't get away!\n");
+                            SemesterProject.storyOutputTF.appendText("\n- You were too slow and couldn't get away!\n");
                             attack();
                         }
+                        // enemy is slower than player - %70 to get away
                     } else if (characterSpeed > enemySpeed) {
-                        if (runChance > 25) {
-                            SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
+                        if (runChance >= 30) {
+                            SemesterProject.storyOutputTF.appendText("\n- You got away!");
                             gotAway();
                         } else {
-                            SemesterProject.storyOutputTF.appendText("\nYou couldn't get away!\n");
+                            SemesterProject.storyOutputTF.appendText("\n- You were too slow and couldn't get away!\n");
                             attack();
                         }
+                        // enemy and player are the same speed - %50 chance to get away
                     } else if (characterSpeed == enemySpeed) {
-                        if (runChance <= 50) {
-                            SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
+                        if (runChance >= 50) {
+                            SemesterProject.storyOutputTF.appendText("\n- You got away!");
                             gotAway();
                         } else {
-                            SemesterProject.storyOutputTF.appendText("\nYou couldn't get away!\n");
+                            SemesterProject.storyOutputTF.appendText("\n- You were too slow and couldn't get away!\n");
                             attack();
                         }
                     }
                 }
             } else {
-            	SemesterProject.storyOutputTF.appendText("\nThere is nothing to run away from.\n");
+            	SemesterProject.storyOutputTF.appendText("\n- There is nothing to run away from.\n");
             }
         }
     }
@@ -538,206 +548,19 @@ public class Action extends FantasyRace {
     
     private static void pickUpItem(int roomNum) {
     	System.out.println("pickUpItem() -- Activated function to pick up item.");
-    	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {
-    		SemesterProject.storyOutputTF.appendText("\n-- ");
-	    	// set stats for the item that the user picks up
-                
-	    	String item = Areas.getItemName();
-	    	switch (item) {
-				case "Dagger":
-					hpChange=0*10;
-					atkChange=1;
-					spdChange=1;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Dagger");
-					System.out.println("pickUpItem() -- Picked up a Dagger. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Longsword":
-					hpChange=0*10;
-					atkChange=3;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Longsword.");
-					System.out.println("pickUpItem() -- Picked Up a Longsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Buckler":
-					hpChange=3*10;
-					atkChange=0;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Buckler.");
-					System.out.println("pickUpItem() -- Picked Up a Buckler. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Plate Armor":
-					hpChange=5*10;
-					atkChange=0;
-					spdChange=-2;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Plate Armor.");
-					System.out.println("pickUpItem() -- Picked Up Plate Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Leather Armor":
-					hpChange=2*10;
-					atkChange=0;
-					spdChange=2;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Leather Armor.");
-					System.out.println("pickUpItem() -- Picked Up Leather Armor. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Thief Idol":
-					hpChange=0*10;
-					atkChange=2;
-					spdChange=4;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Thief Idol.");
-					System.out.println("pickUpItem() -- Picked Up Thief Idol. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Berserker Stone":
-					hpChange=-5*10;
-					atkChange=10;
-					spdChange=3;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Berserker Stone.");
-					System.out.println("pickUpItem() -- Picked Up Berserker Stone. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Great Axe":
-					hpChange=0*10;
-					atkChange=5;
-					spdChange=-2;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Great Axe.");
-					System.out.println("pickUpItem() -- Picked Up a Great Axe. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Nibbles, the House Cat":
-					hpChange=1*10;
-					atkChange=1;
-					spdChange=1;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Nibbles, the House Cat.");
-					System.out.println("pickUpItem() -- Picked Up Nibbles, the House Cat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Priestly Vestments":
-					hpChange=10*10;
-					atkChange=-5;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Priestly Vestments.");
-					System.out.println("pickUpItem() -- Picked Up Priestly Vestments. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Rapier":
-					hpChange=0*10;
-					atkChange=3;
-					spdChange=3;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Rapier.");
-					System.out.println("pickUpItem() -- Picked Up a Rapier. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Hammer":
-					hpChange=0*10;
-					atkChange=2;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Hammer.");
-					System.out.println("pickUpItem() -- Picked Up a Hammer. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Well-Crafted Boots":
-					hpChange=1*10;
-					atkChange=0;
-					spdChange=3;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Some Well-Crafted Boots.");
-					System.out.println("pickUpItem() -- Picked Up Some Well-Crafted Boots. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Assassin Gloves":
-					hpChange=0*10;
-					atkChange=3;
-					spdChange=5;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Assassin Gloves.");
-					System.out.println("pickUpItem() -- Picked Up Assassin Gloves. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Spiffy Hat":
-					hpChange=2*10;
-					atkChange=2;
-					spdChange=2;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Spiffy Hat.");
-					System.out.println("pickUpItem() -- Picked Up a Spiffy Hat. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Sack Lunch":
-					hpChange=5*10;
-					atkChange=0;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up a Sack Lunch.");
-					System.out.println("pickUpItem() -- Picked Up a Sack Lunch. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Embarrassing Drawings":
-					hpChange=-3*10;
-					atkChange=-3;
-					spdChange=3;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Some Embarrassing Drawings.");
-					System.out.println("pickUpItem() -- Picked Up Some Embarrassing Drawings. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Some Self-Esteem":
-					hpChange=5*10;
-					atkChange=5;
-					spdChange=5;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Some Self-Esteem.");
-					System.out.println("pickUpItem() -- Picked Up Some Self-Esteem. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Miniature Mother-in-Law": 
-					hpChange=3*10;
-					atkChange=-3;
-					spdChange=-5;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Your Miniature Mother-in-Law.");
-					System.out.println("pickUpItem() -- Picked Up Your Miniature Mother-in-Law. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Elven Nutcracker":
-					hpChange=0*10;
-					atkChange=1;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Elven Nutcracker.");
-					System.out.println("pickUpItem() -- Picked Up Elven Nutcracker. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Vorpal Sword":
-					hpChange=0*10;
-					atkChange=5;
-					spdChange=7;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Vorpal Sword.");
-					System.out.println("pickUpItem() -- Picked Up Vorpal Sword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Yoga Pants":
-					hpChange=1*10;
-					atkChange=0;
-					spdChange=5;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Yoga Pants.");
-					System.out.println("pickUpItem() -- Picked Up Yoga Pants. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Book of Mormon":
-					hpChange=0*10;
-					atkChange=0;
-					spdChange=0;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Book of Mormon.");
-					System.out.println("pickUpItem() -- Picked Up Book of Mormon. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-				case "Gladius, Fair Broadsword":
-					hpChange=1*10;
-					atkChange=8;
-					spdChange=3;
-					changeCharacterStats(hpChange, atkChange, spdChange);
-					SemesterProject.storyOutputTF.appendText("Picked up Gladius, Fair Broadsword.");
-					System.out.println("pickUpItem() -- Picked Up Gladius, Fair Broadsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
-					break;
-			} 
-	    	SemesterProject.storyOutputTF.appendText("\n");
+    	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {    		
+	    	// set stats for the item that the user picks up                
+	    	String item = Item.getItemName();
+                String itemDescription = Item.getItemDescription();               
+                Item.determineItemStats(item);
+                atkChange = Item.getAttackChange();
+                spdChange = Item.getSpeedChange();
+                hpChange = Item.getHealthChange();
+                SemesterProject.storyOutputTF.appendText("\n-- ");
+                SemesterProject.storyOutputTF.appendText(item);
+                SemesterProject.storyOutputTF.appendText(" --\n");
+                SemesterProject.storyOutputTF.appendText("- " + itemDescription);
+                SemesterProject.storyOutputTF.appendText("\n- Stats Changed: " + atkChange + " Attack, " + spdChange + " Speed, " + hpChange + " Health\n");
 	    	Areas.setGottenItem(roomNum);
     	} else {
     		System.out.println("pickUpItem() -- There is no item here.");
@@ -746,7 +569,7 @@ public class Action extends FantasyRace {
     
     
     // change character's stats after getting an item
-    private static void changeCharacterStats(int hp, int att, int spd) {
+    public static void changeCharacterStats(int hp, int att, int spd) {
         // change character hp
         characterHealth = FantasyRace.getCharacterHealth() + hp;
         FantasyRace.setCharacterHealth(characterHealth);
@@ -765,14 +588,17 @@ public class Action extends FantasyRace {
     
     
     // allow player to retreat to the previous room they were in
+    // get rid of the enemy that they ran away from, unless it was the boss
     public static void gotAway() {
     	System.out.println("gotAway() -- Activated function to set got away.");
-    	SemesterProject.storyOutputTF.appendText("You are filled with determination: +10 HP\n");
-    	characterHealth += 10;
+    	SemesterProject.storyOutputTF.appendText("You are filled with determination: +5 HP\n");
+    	characterHealth += 5;
     	FantasyRace.setCharacterHealth(characterHealth);
     	SemesterProject.setStatsTextField();
     	pickUpItem(Areas.getArea());
-        Areas.setHasEnemy(Areas.getArea(), false);
+        if (Areas.getArea() != 11) {
+            Areas.setHasEnemy(Areas.getArea(), false);
+        }        
     	Areas.setArea(Areas.getLastArea());
     	Areas.activateArea();
     }

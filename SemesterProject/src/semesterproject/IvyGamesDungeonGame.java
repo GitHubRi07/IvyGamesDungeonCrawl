@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
- *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:		 SoftwareProduct
+ *  Description: Take user through a dungeon-crawl-style adventure. 
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors:	 Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
@@ -23,6 +23,7 @@ public class IvyGamesDungeonGame {
     public static void startGame() { 
         // set starting area
     	AreaDefinition.setupAreaDefinitions();
+        Item.setupItems();
         Areas.setArea(0);
         Areas.activateArea();
     }

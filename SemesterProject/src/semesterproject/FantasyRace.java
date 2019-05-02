@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
- *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:       SoftwareProduct
+ *  Description: Take user through a dungeon-crawl-style adventure.  
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors:     Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0
@@ -22,6 +22,7 @@ public abstract class FantasyRace {
     private static int characterSpeed;
     
     private static int enemyHealth;
+    private static int enemyMaxHealth;
     private static int enemyAttackPower;
     private static int enemySpeed;
     
@@ -40,6 +41,9 @@ public abstract class FantasyRace {
     // enemy stats    
     public static int getEnemyHealth() {
         return enemyHealth;
+    }
+    public static int getEnemyMaxHealth() {
+        return enemyMaxHealth;
     }
     public static int getEnemyAttackPower() {
         return enemyAttackPower;
@@ -64,6 +68,9 @@ public abstract class FantasyRace {
     public static void setEnemyHealth(int newEnemyHealth) {
         enemyHealth = newEnemyHealth;
     }
+    public static void setEnemyMaxHealth(int newEnemyMaxHealth) {
+        enemyMaxHealth = newEnemyMaxHealth;
+    }
     public static void setEnemyAttackPower(int newEnemyAttackPower) {
         enemyAttackPower = newEnemyAttackPower;
     }
@@ -78,6 +85,7 @@ public abstract class FantasyRace {
         characterAttackPower = getCharacterAttackPower();
         characterSpeed = getCharacterSpeed();
         enemyHealth = getEnemyHealth();
+        enemyMaxHealth = getEnemyMaxHealth();
         enemyAttackPower = getEnemyAttackPower();
         enemySpeed = getEnemySpeed();
     }

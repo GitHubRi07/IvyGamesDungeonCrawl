@@ -1,7 +1,7 @@
 /**
  *  Application: IvyGames_SoftwareProduct
  *  Description: Take user through a 'choose your own adventure' style story.  
- *  Title:       SoftwareProduct
+ *  Title:       IvyGames' Dungeon Crawl
  *  Authors:     Riley Tucker,  Aiden Hutton,  Karen Stackhouse,  Christopher Fields
 
  *  Version:     1.0

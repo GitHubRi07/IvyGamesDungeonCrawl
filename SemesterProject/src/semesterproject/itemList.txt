@@ -1,0 +1,48 @@
+Dagger
+Longsword
+Buckler
+Plate Armor
+Leather Armor
+Thief Idol
+Berserker Stone
+Great Axe
+Nibbles, the House Cat
+Priestly Vestments
+Rapier
+Hammer
+Well-Crafted Boots
+Assassin Gloves
+Spiffy Hat
+Sack Lunch
+Embarrassing Drawings
+Some Self-Esteem
+Miniature Mother-in-Law
+Elven Nutcracker
+Vorpal Sword
+Yoga Pants
+Book of Mormon
+Gladius, Fair Broadsword.
+Picked up a Dagger. The small blade glints faintly in the torchlight.
+Picked up a Longsword. You feel a sense of dread emanating from the cold steel.
+Picked up a Buckler. The laughably small surface area could be useful if implemented well.
+Picked up Plate Armor. The weight of this armor falls on your back as if you were Atlas himself.
+Picked up Leather Armor. The material may be of little protection, but it doesn’t matter if you can move like the wind.
+Picked up Thief Idol. The small wooden doll strikes fear so deep into your heart that it blesses you with the reflexes of a cat.
+Picked up Berserker Stone.The harder you clench this stone, the more a bloodthirsty, uncontrollable rage consumes you.
+Picked up a Great Axe. The truly strong fear not the wounds of battle, for it is they that inflict them.
+Picked up Nibbles, the House Cat. This little cat fills you with determination. Maybe it’s the little helmet that does it.
+Picked up Priestly Vestments. The fabric vibrates with a lifeblood so old that it had no need to survive; it thrived.
+Picked up a Rapier. The stark, cold needle whips through the air as if it were made of nothing.
+Picked up a Hammer. It may not be the most legendary of weapons but smashing skulls can sure make you feel legendary.
+Picked up Some Well-Crafted Boots. A spring in your step, a whistle to your tune.
+Picked up Assassin Gloves. The leather gloves are softer than a baby’s bottom, and more silent than an owl in flight.
+Picked up a Spiffy Hat. It doesn’t offer much, but it sure does lift your spirits.
+Picked up a Sack Lunch. Roast beef! Nice!
+Picked up Some Embarrassing Drawings. The forbidden texts were not meant to be seen by anybody… but the day has come.
+Picked up Some Self-Esteem. The secret to being strong is to love oneself.
+Picked up Your Miniature Mother-in-Law. While her nagging may strengthen your resistance to insults, her words scar you nonetheless.
+Picked up Elven Nutcracker. A small silver nutcracker. Intricately carved in the Elven language.
+Picked up Vorpal Sword. A needle so fast, it snaps loudly in the wind.
+Picked up Yoga Pants. While they will not protect you in any way, they are very comfortable.
+Picked up Book of Mormon. A book about inheriting your own planet from an all-powerful deity. You read it but aren’t sure if you really gained anything.
+Picked Up Gladius, Fair Broadsword. A broadsword of peerless craftsmanship.
