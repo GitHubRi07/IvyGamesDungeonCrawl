@@ -119,8 +119,8 @@ public class Areas {
     	Image RoomPic = new Image(roomImagePathString);
     	SemesterProject.mapIV.setImage(RoomPic);
     }
-    public static void setHasEnemy(int roomNum) {
-    	hasEnemy[roomNum] = true;
+    public static void setHasEnemy(int roomNum, boolean enemy) {
+    	hasEnemy[roomNum] = enemy;
     }
     public static void setEnemyDead(int roomNum) {
     	enemyDead[roomNum] = true;
@@ -354,19 +354,23 @@ public class Areas {
         // there are no items in room0, the cave entrance
     	if ((roomNum != 0)) {
             // rooms 20-25 have a 40% chance to find an item because they are dark
-            if ((roomNum == 20) || (roomNum != 21) || (roomNum != 22) || 
-                    (roomNum != 23) || (roomNum != 24) || (roomNum != 25)) {
+            if ((roomNum == 20) || (roomNum == 21) || (roomNum == 22) || 
+                    (roomNum == 23) || (roomNum == 24) || (roomNum == 25)) {
                 if (percentChance > 40) {
         		setHasItem(roomNum);
         		System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
         	}
-            } else {
+                // there are always items in rooms 1, 2, and 3
+            } else if ((roomNum == 1) ||(roomNum == 2) || (roomNum == 3)) {
+                setHasItem(roomNum);
+                System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
+        	
                 // all other rooms have an 80% chance to find an item.
-        	if (percentChance > 20) {
+            } else if (percentChance > 20) {
         		setHasItem(roomNum);
         		System.out.println("determineIfHasItem() -- There is an item in room: " + roomNum);
         	}
-            }
+            
     	}
     }
     
@@ -374,22 +378,23 @@ public class Areas {
     	System.out.println("determineIfHasEnemy() -- Activated function to determine if a room has an enemy.");
         int percentChance = (int) Math.ceil(Math.random()*100);
     	System.out.println("determineIfHasEnemy() -- Percent chance to find an enemy: %" + percentChance);
-        // there are no enemies at the cave entrance and there is a boss in area 11
-    	if (roomNum != 0) {
+        // there are no enemies at the cave entrance or rooms 1, 2, and 3
+    	if ((roomNum != 0) && (roomNum != 1) && (roomNum != 2) && (roomNum != 3)) {
             // rooms 20-25 have a 50% chance to find an enemy because they are dark
             if ((roomNum == 20) || (roomNum == 21) || (roomNum == 22) || 
                     (roomNum == 23) || (roomNum == 24) || (roomNum == 25)) {
                 if (percentChance > 50) {
-        		setHasEnemy(roomNum);
+        		setHasEnemy(roomNum, true);
         		System.out.println("determineIfHasEnemy() -- there is an enemy in room: " + roomNum);
         	}
+            // room 11 is the boss room
             } else if (roomNum == 11) {
-    		setHasEnemy(roomNum);
+    		setHasEnemy(roomNum, true);
     		System.out.print("determineIfHasEnemy() -- Boss enemy room");
             } else {
-                // in all other rooms there is a 25% chance that there will be an enemy
+                // in all other rooms there is a 75% chance that there will be an enemy
         	if (percentChance > 25) {
-                    setHasEnemy(roomNum);
+                    setHasEnemy(roomNum, true);
                     System.out.println("determineIfHasEnemy() -- there is an enemy in room: " + roomNum);
         	}
             }

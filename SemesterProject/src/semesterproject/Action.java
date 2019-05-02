@@ -454,14 +454,16 @@ public class Action extends FantasyRace {
         			// character or enemy gets two attacks (attack damage x2) if speed is more than, or equal to, 
         			// double the opponent's speed. Otherwise, they each only get x1 attack speed.            
         			if ((characterSpeed*2) <= enemySpeed) {
-        				characterAttackDamage = characterAttack;
-        				enemyAttackDamage = enemyAttack * 2;
+                                    SemesterProject.storyOutputTF.appendText("\nYou are much faster than your opponent. You attacked twice!");
+                                    characterAttackDamage = characterAttack;
+                                    enemyAttackDamage = enemyAttack * 2;
         			} else if (characterSpeed >= (enemySpeed*2)){
-        				characterAttackDamage = characterAttack * 2;
-        				enemyAttackDamage = enemyAttack;
+                                    SemesterProject.storyOutputTF.appendText("\nYour enemy is much faster than you. They attacked twice!");
+                                    characterAttackDamage = characterAttack * 2;
+                                    enemyAttackDamage = enemyAttack;
         			} else {
-        				characterAttackDamage = characterAttack;
-        				enemyAttackDamage = enemyAttack;
+                                    characterAttackDamage = characterAttack;
+                                    enemyAttackDamage = enemyAttack;
         			}
         			enemyHealth -= characterAttackDamage;
         			characterHealth -= enemyAttackDamage;
@@ -500,7 +502,7 @@ public class Action extends FantasyRace {
     		if (Areas.getHasEnemy(Areas.getArea())) {
                 if (!Areas.getEnemyDead(Areas.getArea())) { 
                     int runChance = (int) (Math.random()*100);
-                    SemesterProject.storyOutputTF.appendText("\nRun Chance: " + runChance + "%\n");
+                    SemesterProject.storyOutputTF.appendText("\nYou have a : %" + runChance + " chance to get away.\n");
                     if (characterSpeed < enemySpeed) {
                         if (runChance > 75 ) {
                             SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
@@ -539,6 +541,7 @@ public class Action extends FantasyRace {
     	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {
     		SemesterProject.storyOutputTF.appendText("\n-- ");
 	    	// set stats for the item that the user picks up
+                
 	    	String item = Areas.getItemName();
 	    	switch (item) {
 				case "Dagger":
@@ -669,7 +672,7 @@ public class Action extends FantasyRace {
 					SemesterProject.storyOutputTF.appendText("Picked up a Sack Lunch.");
 					System.out.println("pickUpItem() -- Picked Up a Sack Lunch. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
-				case "Embarrassing Photos":
+				case "Embarrassing Drawings":
 					hpChange=-3*10;
 					atkChange=-3;
 					spdChange=3;
@@ -769,6 +772,7 @@ public class Action extends FantasyRace {
     	FantasyRace.setCharacterHealth(characterHealth);
     	SemesterProject.setStatsTextField();
     	pickUpItem(Areas.getArea());
+        Areas.setHasEnemy(Areas.getArea(), false);
     	Areas.setArea(Areas.getLastArea());
     	Areas.activateArea();
     }
