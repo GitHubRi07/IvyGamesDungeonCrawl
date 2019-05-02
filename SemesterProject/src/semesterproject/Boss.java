@@ -15,12 +15,12 @@ package semesterproject;
 
 
 public class Boss extends FantasyRace {
-
-    // variables
-	// between 6-25, 11-30, 6-25
-    int constituton = (int) ((Math.random()*((20-1)+1))+1) + 5;
-    int strength = (int) ((Math.random()*((20-1)+1))+1) + 10;
-    int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 5;
+	
+	// variables
+	// between 21-31, 46-56, 21-31
+    int constituton = (int) (Math.random() * ((31 - 21) + 1)) + 21;
+    int strength = (int) (Math.random() * ((56 - 46) + 1)) + 46;
+    int dexterity = (int) (Math.random() * ((31 - 21) + 1)) + 21;
 
     // create boss
     Boss() {
