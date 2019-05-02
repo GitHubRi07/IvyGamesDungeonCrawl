@@ -15,13 +15,13 @@ package semesterproject;
 
 
 public class Ogre extends FantasyRace {
-    
+	// this is my swamp now, donkey
+	
     // variables
-	// between 5-24, 6-25, 2-21
-    int constituton = (int) ((Math.random()*((20-1)+1))+1) + 4;
-    // this is my swamp now, donkey
-    int strength = (int) ((Math.random()*((20-1)+1))+1) + 5;
-    int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 1;
+	// between 16-26, 21-31, 1-10
+    int constituton = (int) (Math.random() * ((26 - 16) + 1)) + 16;
+    int strength = (int) (Math.random() * ((31 - 21) + 1)) + 21;
+    int dexterity = (int) (Math.random() * ((10 - 1) + 1)) + 1;
     
     // create an ogre
     Ogre() {
