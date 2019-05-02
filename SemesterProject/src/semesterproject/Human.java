@@ -18,9 +18,9 @@ public class Human extends FantasyRace {
     
     // variables
 	// between 11-21, 11-21, 11-21
-    int constituton = (int) (Math.random() * ((21 - 11) + 1)) + 111;
-    int strength = (int) (Math.random() * ((21 - 11) + 1)) + 111;
-    int dexterity = (int) (Math.random() * ((21 - 11) + 1)) + 111;
+    int constituton = (int) (Math.random() * ((21 - 11) + 1)) + 11;
+    int strength = (int) (Math.random() * ((21 - 11) + 1)) + 11;
+    int dexterity = (int) (Math.random() * ((21 - 11) + 1)) + 11;
     
     // create a human
     Human() {
