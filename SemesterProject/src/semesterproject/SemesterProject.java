@@ -44,7 +44,7 @@ public class SemesterProject extends Application {
     final String AREA_DEFINITION_FILE = "areaDescriptions.txt";
     private final String FONT_NAME = "Consolas";
     private final int FONT_SIZE = 10;
-	    
+	
     // buttons
     private static Button goWestBT = new Button("Go West");
     private static Button goEastBT = new Button("Go East");
@@ -194,12 +194,15 @@ public class SemesterProject extends Application {
     // select race and set stats
     public static void selectRace() {
     	// tell player how to choose race
-        storyOutputTF.appendText("\nChoose a race."
+        storyOutputTF.appendText("\n--- Choose a race. ---"
         		+ "\nYou can be a human, an elf, or a dwarf."
-        		+ "\nEach race has different stats.\n");
-        storyOutputTF.appendText("Choose wisely, as you can only make this decision once.\n");
-        storyOutputTF.appendText("Enter the key 'h', 'e', or 'd' to choose Human, Elf, or Dwarf respectively.\n\n");
-        storyOutputTF.appendText("Press the 'Enter' key to start the game once you have selected your race.\n\n");
+        		+ "\nEach race has different Attack Power, Constitution, and Speed."
+        		+ "\nHumans have a fairly average range of abilities."
+        		+ "\nElves are known to be quicker than others, but not as powerful."
+        		+ "\nDwarves are considered hardy, but  they are stout and slow.\n");
+        storyOutputTF.appendText("\nChoose wisely, as you can only make this decision once.\n");
+        storyOutputTF.appendText("\nEnter the key 'h', 'e', or 'd' to choose Human, Elf, or Dwarf respectively.\n");
+        storyOutputTF.appendText("\nPress the 'Enter' key to start the game once you have selected your race.\n");
         // take player input to select race
         storyOutputTF.setOnKeyTyped((KeyEvent selectRaceEvent) -> {
             String input = selectRaceEvent.getCharacter();

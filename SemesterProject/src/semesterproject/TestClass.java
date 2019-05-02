@@ -18,7 +18,7 @@ public class TestClass {
     public static void main(String[] args) {        
         // test that stats, attack(), and run() work
         testFantacyRaces();
-        testActions();     
+        testActions();
     }
     
     
@@ -174,7 +174,7 @@ public class TestClass {
                 System.out.println("\nRun Chance: " + runChance + "%\n");
                 if (FantasyRace.getCharacterSpeed() < FantasyRace.getEnemySpeed()) {
                     if (runChance > 75 ) {
-                    	Action.gotAway(true);
+                    	Action.gotAway();
                     	System.out.println("\nGot away!\n");
                     } else {
                     	System.out.println("\nCouldn't get away!\n");
@@ -184,7 +184,7 @@ public class TestClass {
                 
                 if (FantasyRace.getCharacterSpeed() > FantasyRace.getEnemySpeed()) {
                     if (runChance > 25) {
-                    	Action.gotAway(true);
+                    	Action.gotAway();
                     	System.out.println("\nGot away!\n");
                     } else {
                     	System.out.println("\nCouldn't get away!\n");
@@ -194,7 +194,7 @@ public class TestClass {
                 
                 if (FantasyRace.getCharacterSpeed() == FantasyRace.getEnemySpeed()) {
                     if (runChance <= 50) {
-                    	Action.gotAway(true);
+                    	Action.gotAway();
                     	System.out.println("\nGot away!\n");
                     } else {
                     	System.out.println("\nCouldn't get away!\n");

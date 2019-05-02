@@ -440,14 +440,14 @@ public class Action extends FantasyRace {
     
     public static void attack() {
     	System.out.println("attack() -- Pressed button to Attack");
-    	if (Areas.getHasEnemy(Areas.getArea())) {
-    		characterHealth = FantasyRace.getCharacterHealth();
-            characterAttack = FantasyRace.getCharacterAttackPower();
-            characterSpeed = FantasyRace.getCharacterSpeed();
-            enemyHealth = FantasyRace.getEnemyHealth();
-            enemyAttack = FantasyRace.getEnemyAttackPower();
-            enemySpeed = FantasyRace.getEnemySpeed();
-        	if ((!getPlayerDead()) && (!getPlayerWon())) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
+        	if (Areas.getHasEnemy(Areas.getArea())) {
+        		characterHealth = FantasyRace.getCharacterHealth();
+                characterAttack = FantasyRace.getCharacterAttackPower();
+                characterSpeed = FantasyRace.getCharacterSpeed();
+                enemyHealth = FantasyRace.getEnemyHealth();
+                enemyAttack = FantasyRace.getEnemyAttackPower();
+                enemySpeed = FantasyRace.getEnemySpeed();
         		if ((enemyHealth > 0) && (characterHealth > 0)) {
         			int characterAttackDamage;
         			int enemyAttackDamage;
@@ -471,16 +471,23 @@ public class Action extends FantasyRace {
         			SemesterProject.storyOutputTF.appendText("\nDealt " + characterAttackDamage + " damage.");
         			SemesterProject.storyOutputTF.appendText("\nTook " + enemyAttackDamage + " damage.");
         			SemesterProject.storyOutputTF.appendText("\nFoe has " + enemyHealth + " health remaining.\n");
-        		} else if (enemyHealth <= 0) {
+        		}
+        		if (enemyHealth <= 0) {
+        			if (Areas.getArea() == 11) {
+            			SemesterProject.storyOutputTF.appendText("\n-- You defeated the Bandit Leader! --\n");
+            			youWin();
+        			} else {
+            			SemesterProject.storyOutputTF.appendText("\n-- You killed the enemy! --\n");
+        			}
         			Areas.setEnemyDead(Areas.getArea());
-        			SemesterProject.storyOutputTF.appendText("\nYou killed the enemy!\n");
-        		} else if (characterHealth <= 0) {
+        		}
+        		if (characterHealth <= 0) {
         			characterDied();
         		}
-        	}
-    	} else {
-    		SemesterProject.storyOutputTF.appendText("\nThere is nothing to attack.");
-    	}    	
+        	} else {
+        		SemesterProject.storyOutputTF.appendText("\nThere is nothing to attack.\n");
+        	} 
+    	}   	
     }
     
     
@@ -489,52 +496,40 @@ public class Action extends FantasyRace {
     // if unsuccessful, initiate another round of attack()
     public static void run() {
     	System.out.println("run() -- Pressed button to Run");
-    	if (Areas.getHasEnemy(Areas.getArea())) {
-    		if ((!getPlayerDead()) && (!getPlayerWon())) {
+    	if ((!getPlayerDead()) && (!getPlayerWon())) {
+    		if (Areas.getHasEnemy(Areas.getArea())) {
                 if (!Areas.getEnemyDead(Areas.getArea())) { 
                     int runChance = (int) (Math.random()*100);
                     SemesterProject.storyOutputTF.appendText("\nRun Chance: " + runChance + "%\n");
                     if (characterSpeed < enemySpeed) {
                         if (runChance > 75 ) {
-                            gotAway(true);
-                            SemesterProject.storyOutputTF.appendText("\nYou got away!");
-                            SemesterProject.storyOutputTF.appendText("\nYou are filled with determination: +10 HP\n");
-                			characterHealth += 10;
-                			FantasyRace.setCharacterHealth(characterHealth);
-                			SemesterProject.setStatsTextField();
+                            SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
+                            gotAway();
                         } else {
                             SemesterProject.storyOutputTF.appendText("\nYou couldn't get away!\n");
                             attack();
                         }
                     } else if (characterSpeed > enemySpeed) {
                         if (runChance > 25) {
-                            gotAway(true);
-                            SemesterProject.storyOutputTF.appendText("\nYou got away!");
-                            SemesterProject.storyOutputTF.appendText("\nYou are filled with determination: +10 HP\n");
-                			characterHealth += 10;
-                			FantasyRace.setCharacterHealth(characterHealth);
-                			SemesterProject.setStatsTextField();
+                            SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
+                            gotAway();
                         } else {
                             SemesterProject.storyOutputTF.appendText("\nYou couldn't get away!\n");
                             attack();
                         }
                     } else if (characterSpeed == enemySpeed) {
                         if (runChance <= 50) {
-                            gotAway(true);
-                            SemesterProject.storyOutputTF.appendText("\nYou got away!");
-                            SemesterProject.storyOutputTF.appendText("\nYou are filled with determination: +10 HP\n");
-                			characterHealth += 10;
-                			FantasyRace.setCharacterHealth(characterHealth);
-                			SemesterProject.setStatsTextField();
+                            SemesterProject.storyOutputTF.appendText("\nYou got away!\n");
+                            gotAway();
                         } else {
                             SemesterProject.storyOutputTF.appendText("\nYou couldn't get away!\n");
                             attack();
                         }
                     }
                 }
-            }        
-        } else {
-        	SemesterProject.storyOutputTF.appendText("\nThere is nothing to run away from.");
+            } else {
+            	SemesterProject.storyOutputTF.appendText("\nThere is nothing to run away from.\n");
+            }
         }
     }
     
@@ -542,6 +537,7 @@ public class Action extends FantasyRace {
     private static void pickUpItem(int roomNum) {
     	System.out.println("pickUpItem() -- Activated function to pick up item.");
     	if (Areas.getHasItem(roomNum) && !Areas.getGottenItem(roomNum)) {
+    		SemesterProject.storyOutputTF.appendText("\n-- ");
 	    	// set stats for the item that the user picks up
 	    	String item = Areas.getItemName();
 	    	switch (item) {
@@ -737,7 +733,8 @@ public class Action extends FantasyRace {
 					SemesterProject.storyOutputTF.appendText("Picked up Gladius, Fair Broadsword.");
 					System.out.println("pickUpItem() -- Picked Up Gladius, Fair Broadsword. Stats Added: " + hpChange + " HP, " + atkChange + " ATK, " + spdChange + " SPD");
 					break;
-			}
+			} 
+	    	SemesterProject.storyOutputTF.appendText("\n");
 	    	Areas.setGottenItem(roomNum);
     	} else {
     		System.out.println("pickUpItem() -- There is no item here.");
@@ -749,11 +746,11 @@ public class Action extends FantasyRace {
     private static void changeCharacterStats(int hp, int att, int spd) {
         // change character hp
         characterHealth = FantasyRace.getCharacterHealth() + hp;
-        FantasyRace.setCharacterHealth(characterSpeed);
+        FantasyRace.setCharacterHealth(characterHealth);
         
         // change character attack
         characterAttack = FantasyRace.getCharacterAttackPower() + att;
-        FantasyRace.setCharacterAttackPower(characterSpeed);
+        FantasyRace.setCharacterAttackPower(characterAttack);
         
         // change character speed
         characterSpeed = FantasyRace.getCharacterSpeed() + spd;
@@ -765,13 +762,15 @@ public class Action extends FantasyRace {
     
     
     // allow player to retreat to the previous room they were in
-    public static boolean gotAway(boolean run) {
+    public static void gotAway() {
     	System.out.println("gotAway() -- Activated function to set got away.");
-         if (run = true) {
-        	 pickUpItem(Areas.getArea());
-             Areas.setArea(Areas.getLastArea());             
-         }
-        return run;
+    	SemesterProject.storyOutputTF.appendText("You are filled with determination: +10 HP\n");
+    	characterHealth += 10;
+    	FantasyRace.setCharacterHealth(characterHealth);
+    	SemesterProject.setStatsTextField();
+    	pickUpItem(Areas.getArea());
+    	Areas.setArea(Areas.getLastArea());
+    	Areas.activateArea();
     }
     
     
@@ -789,9 +788,13 @@ public class Action extends FantasyRace {
     	System.out.println("youWin() -- Activated function to set you won.");
         // set end game message
     	setPlayerWon(true);
-        SemesterProject.storyOutputTF.appendText("\nCongradulations! You have completed the dungeon!"
+        SemesterProject.storyOutputTF.appendText("\nCongradulations!"
+        		+ "\nYou have completed the dungeon! You defeated the leader of the bandits, "
+        		+ "and they will no longer terrorize the countryside."
+        		+ "\nHowever, bandits like these are always on the move, and"
+        		+ "a new band of mauraders is sure to take this one's place."
         		+ "\nWill you come back for more?\n\n");
-        SemesterProject.storyOutputTF.appendText("Written by:\nRiley Tucker\nAiden Hutton"
-        		+ "\nKaren Stackhouse\nChristopher Fields\n");
+        SemesterProject.storyOutputTF.appendText("\nWritten and Developed by:\n"
+        		+ "Riley Tucker - Aiden Hutton - Karen Stackhouse - Christopher Fields");
     }
 }

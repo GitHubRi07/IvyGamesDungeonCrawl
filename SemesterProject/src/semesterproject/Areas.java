@@ -124,6 +124,7 @@ public class Areas {
     }
     public static void setEnemyDead(int roomNum) {
     	enemyDead[roomNum] = true;
+    	hasEnemy[roomNum] = false;
     }
         
     
@@ -139,7 +140,7 @@ public class Areas {
         			roomsArray[0] = new Areas(0);
     			} else {
     				setRoomImage(currentArea);
-        			AreaDefinition.areaMessage(currentArea);    		
+        			AreaDefinition.areaMessage(currentArea);
     			}
     			break;
     		case 1:
@@ -404,6 +405,7 @@ public class Areas {
         		// set boss room enemy
         		boss = new Boss();
         		boss.setBossStats();
+    			SemesterProject.storyOutputTF.appendText("\n-- This is the Bandit Leader! --");
         		System.out.println("generateEnemies() -- Enemies Here: " + boss);
     		} else {
     			// code to set the enemies for the specific room
@@ -412,19 +414,19 @@ public class Areas {
         		case 1:
         			goblin = new Goblin();
         			goblin.setGoblinStats();
-        			SemesterProject.storyOutputTF.appendText("\nThere is a Goblin!");
+        			SemesterProject.storyOutputTF.appendText("\n-- There is a Goblin! --");
             		System.out.println("generateEnemies() -- Enemies Here: " + goblin);
         			break;
         		case 2:
         			orc = new Orc();
         			orc.setOrcStats();
-        			SemesterProject.storyOutputTF.appendText("\nThere is an Orc!");
+        			SemesterProject.storyOutputTF.appendText("\n-- There is an Orc! --");
             		System.out.println("generateEnemies() -- Enemies Here: " + orc);
         			break;
         		case 3:
         			ogre = new Ogre();
         			ogre.setOgreStats();
-        			SemesterProject.storyOutputTF.appendText("\nThere is an Ogre!");
+        			SemesterProject.storyOutputTF.appendText("\n-- There is an Ogre! --");
             		System.out.println("generateEnemies() -- Enemies Here: " + ogre);
         			break;
         		}

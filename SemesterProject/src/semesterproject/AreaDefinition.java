@@ -88,6 +88,7 @@ public class AreaDefinition {
     
     // set and display area message
     public static void areaMessage(int roomNum) {
+        SemesterProject.storyOutputTF.appendText("\n-- ");
         if (!Areas.getBeenTo(roomNum)) {
             // first time message
             SemesterProject.storyOutputTF.appendText(getFirstMessage(roomNum));
@@ -95,5 +96,19 @@ public class AreaDefinition {
             // regular message
             SemesterProject.storyOutputTF.appendText(getAreaMessage(roomNum));
         }
+        SemesterProject.storyOutputTF.appendText("\n");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
