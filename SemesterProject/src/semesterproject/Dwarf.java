@@ -17,10 +17,10 @@ package semesterproject;
 public class Dwarf extends FantasyRace {
     
     // variables
-	// between 5-24, 4-23, 3-22
-    int constituton = (int) ((Math.random()*((20-1)+1))+1) + 4;
-    int strength = (int) ((Math.random()*((20-1)+1))+1) + 3;
-    int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 2;
+	// between 16-26, 11-21, 6-16
+    int constituton = (int) (Math.random() * ((26 - 16) + 1)) + 16;
+    int strength = (int) (Math.random() * ((21 - 11) + 1)) + 11;
+    int dexterity = (int) (Math.random() * ((16 - 6) + 1)) + 6;
     
     // create a dwarf
     Dwarf() {
