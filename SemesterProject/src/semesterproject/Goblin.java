@@ -17,10 +17,10 @@ package semesterproject;
 public class Goblin extends FantasyRace {
     
     // variables
-	// between 3-22, 3-22, 6-25
-    int constituton = (int) ((Math.random()*((20-1)+1))+1) + 2;
-    int strength = (int) ((Math.random()*((20-1)+1))+1) + 2;
-    int dexterity = (int) ((Math.random()*((20-1)+1))+1) + 5;
+	// between 6-16, 6-16, 21-31
+    int constituton = (int) (Math.random() * ((16 - 6) + 1)) + 6;
+    int strength = (int) (Math.random() * ((16 - 6) + 1)) + 6;
+    int dexterity = (int) (Math.random() * ((31 - 21) + 1)) + 21;
     
     // create a goblin
     Goblin() {
